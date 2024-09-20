@@ -17,5 +17,5 @@ def runTest(String stageName, Closure body) {
   }
 }
 
-fullpipeline(path:"aziz-test-two",artifact:"animal-husbandry.war",branchdev:"development")
+fullpipeline(path:"aziz-test-two",artifact:"animal-husbandry-two.war",branchdev:"development")
 
