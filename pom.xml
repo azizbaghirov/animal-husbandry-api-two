@@ -11,7 +11,7 @@
     <packaging>war</packaging>
 
     <groupId>az.eagro</groupId>
-    <artifactId>animal-husbandry</artifactId>
+    <artifactId>animal-husbandry-two</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>eAgro - Damazlıq</name>
     <description>Damazlıq təsərrüfatı üçün serifikat alınması</description>
