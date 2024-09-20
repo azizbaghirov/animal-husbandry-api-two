@@ -1,5 +1,5 @@
 @Library("test-library") _
-@Library("google-chat-library") _
+@Library("google-chat-library")
 
 
 fullpipeline(path:"aziz-test-two",artifact:"animal-husbandry-two.war",branchdev:"development")
