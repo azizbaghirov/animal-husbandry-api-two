@@ -17,5 +17,5 @@ def runTest(String stageName, Closure body) {
   }
 }
 
-fullpipeline()
+fullpipelinetwo()
 
