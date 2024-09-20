@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_add_label_to_document_type_table" author="${author}">
+
+        <addColumn schemaName="${schema}" tableName="DocumentType">
+            <column name="Label" type="NVARCHAR(1000)"/>
+        </addColumn>
+
+        <addColumn schemaName="${schema}" tableName="DocumentType">
+            <column name="ReadOnly" type="BIT" defaultValue="0"/>
+        </addColumn>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_document_type_data_certificate" author="${author}">
+
+        <sql>
+            INSERT INTO AnimalHusbandry.DocumentType(Name, Label, ReadOnly)
+            values (N'Şəhadətnamə', 'Certificate', 1);
+        </sql>
+
+    </changeSet>
+
+
+</databaseChangeLog>

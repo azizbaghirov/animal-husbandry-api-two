@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_columns_to_certification_application_table" author="${author}">
+
+        <addColumn schemaName="${schema}" tableName="CertificationApplication">
+            <column name="AnimalTypeId" type="INTEGER"/>
+        </addColumn>
+
+        <addColumn schemaName="${schema}" tableName="CertificationApplication">
+            <column name="FarmTypeId" type="INTEGER"/>
+        </addColumn>
+
+
+        <addForeignKeyConstraint constraintName="FK_CertificationApplication_AnimalTypeId"
+                                 baseTableSchemaName="${schema}" baseTableName="CertificationApplication"
+                                 baseColumnNames="AnimalTypeId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="AnimalType"
+                                 referencedColumnNames="AnimalTypeId"/>
+
+        <addForeignKeyConstraint constraintName="FK_CertificationApplication_FarmTypeId"
+                                 baseTableSchemaName="${schema}" baseTableName="CertificationApplication"
+                                 baseColumnNames="FarmTypeId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="BreedingAnimalFarmType"
+                                 referencedColumnNames="FarmTypeId"/>
+
+    </changeSet>
+
+</databaseChangeLog>

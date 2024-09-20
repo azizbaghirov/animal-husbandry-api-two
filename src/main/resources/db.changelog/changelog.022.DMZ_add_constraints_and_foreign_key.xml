@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_add_not_null_constraint_field_value_table" author="${author}">
+
+        <addNotNullConstraint constraintName="NN_FieldValue_ApplicationDataId"
+                              schemaName="${schema}" tableName="FieldValue"
+                              columnName="ApplicationDataId" columnDataType="INTEGER"/>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_foreign_key_certification_application_data_table" author="${author}">
+
+        <addForeignKeyConstraint constraintName="FK_CertificationApplicationData_ApplicationId"
+                                 baseTableSchemaName="${schema}" baseTableName="CertificationApplicationData"
+                                 baseColumnNames="ApplicationId"
+                                 referencedTableSchemaName="${schema}"
+                                 referencedTableName="CertificationApplication"
+                                 referencedColumnNames="ApplicationId"/>
+
+    </changeSet>
+
+
+</databaseChangeLog>

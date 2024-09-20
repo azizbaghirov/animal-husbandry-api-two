@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ-57_final_monitoring_judgement_summary_view" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="FinalMonitoringJudgement">
+
+            <column name="FinalMonitoringJudgementId" type="UUID">
+                <constraints primaryKey="true" primaryKeyName="PK_FinalMonitoringJudgement_FinalMonitoringJudgementId"/>
+            </column>
+
+            <column name="CertificationApplicationId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_FinalMonitoringJudgement_CertificationApplicationId"/>
+            </column>
+
+            <column name="Compliant" type="BOOLEAN">
+                <constraints nullable="false" notNullConstraintName="NN_FinalMonitoringJudgement_Compliant"/>
+            </column>
+
+            <column name="Justification" type="NVARCHAR(2048)">
+                <constraints nullable="false" notNullConstraintName="NN_FinalMonitoringJudgement_Justification"/>
+            </column>
+
+            <column name="CreatedBy" type="UUID">
+                <constraints nullable="false" notNullConstraintName="NN_FinalMonitoringJudgement_CreatedBy"/>
+            </column>
+
+            <column name="CreatedAt" type="TIMESTAMP">
+                <constraints nullable="false" notNullConstraintName="NN_FinalMonitoringJudgement_CreatedBy"/>
+            </column>
+
+            <column name="ModifiedAt" type="TIMESTAMP"/>
+            <column name="DeletedAt" type="TIMESTAMP"/>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+                constraintName="FK_FinalMonitoringJudgement_CertificationApplicationId"
+                baseTableSchemaName="${schema}" baseTableName="FinalMonitoringJudgement" baseColumnNames="CertificationApplicationId"
+                referencedTableSchemaName="${schema}" referencedTableName="CertificationApplication" referencedColumnNames="ApplicationId"
+        />
+
+        <addForeignKeyConstraint
+                constraintName="FK_FinalMonitoringJudgement_CreatedBy"
+                baseTableSchemaName="${schema}" baseTableName="FinalMonitoringJudgement" baseColumnNames="CreatedBy"
+                referencedTableSchemaName="${schema}" referencedTableName="Operator" referencedColumnNames="OperatorId"
+        />
+
+        <createTable schemaName="${schema}" tableName="CertificationCommissionMembership">
+
+            <column name="CertificationCommissionMembershipId" type="UUID">
+                <constraints primaryKey="true" primaryKeyName="PK_CertificationCommissionMembership_CertificationCommissionMembershipId"/>
+            </column>
+
+            <column name="MembershipYear" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_CertificationCommissionMembership_MembershipYear"/>
+            </column>
+
+        </createTable>
+
+        <createTable schemaName="${schema}" tableName="CertificationCommissionMember">
+
+            <column name="CertificationCommissionMemberId" type="UUID">
+                <constraints primaryKey="true" primaryKeyName="PK_CertificationCommissionMember_CertificationCommissionMemberId"/>
+            </column>
+
+            <column name="CertificationCommissionMembershipId" type="UUID">
+                <constraints nullable="false" notNullConstraintName="NN_CertificationCommissionMember_CertificationCommissionMembershipId"/>
+            </column>
+
+            <column name="OperatorId" type="UUID">
+                <constraints nullable="false" notNullConstraintName="NN_CertificationCommissionMember_OperatorId"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+                constraintName="FK_CertificationCommissionMember_CertificationCommissionMembershipId"
+                baseTableSchemaName="${schema}" referencedTableSchemaName="${schema}"
+                baseTableName="CertificationCommissionMember" baseColumnNames="CertificationCommissionMembershipId"
+                referencedTableName="CertificationCommissionMembership" referencedColumnNames="CertificationCommissionMembershipId"
+        />
+
+        <addForeignKeyConstraint
+                constraintName="FK_CertificationCommissionMember_CreatedBy"
+                baseTableSchemaName="${schema}" referencedTableSchemaName="${schema}"
+                baseTableName="CertificationCommissionMember" baseColumnNames="OperatorId"
+                referencedTableName="Operator" referencedColumnNames="OperatorId"
+        />
+
+    </changeSet>
+
+</databaseChangeLog>

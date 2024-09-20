@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_delete_animal_sort_from_animal_sort_table" author="${author}">
+
+        <sql>
+            DELETE FROM AnimalHusbandry.AnimalSort
+            WHERE AnimalSortId in ('BAD5E67D-D682-48B4-9DD0-49CB553F2323','00A04132-D693-4EF7-8D37-8E2437E51D6E');
+        </sql>
+
+    </changeSet>
+
+
+</databaseChangeLog>

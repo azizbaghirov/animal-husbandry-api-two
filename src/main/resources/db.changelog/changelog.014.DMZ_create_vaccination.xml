@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_vaccination_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="Vaccination">
+
+            <column name="VaccinationId" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_Vaccination_VaccinationId"/>
+            </column>
+
+            <column name="Name" type="NVARCHAR(255)">
+                <constraints unique="true" uniqueConstraintName="UK_Vaccination_Name"
+                             nullable="false"
+                             notNullConstraintName="NN_Vaccination_Name"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_vaccination_fill" author="${author}">
+
+        <sql>
+            INSERT INTO AnimalHusbandry.Vaccination (Name)
+            VALUES (N'Qarayara'),
+                   (N'Bruselyoz ST-19'),
+                   (N'Dabaq'),
+                   (N'Leptozpiros'),
+                   (N'Vərəm'),
+                   (N'Modulyar dermatit');
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>

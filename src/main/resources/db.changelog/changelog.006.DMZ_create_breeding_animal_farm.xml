@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_breeding_animal_farm" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="BreedingAnimalFarm">
+
+            <column name="FarmId" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_BreedingAnimalFarm_FarmId"/>
+            </column>
+
+            <column name="FarmerId" type="UUID">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarm_FarmerId"/>
+            </column>
+
+            <column name="FarmTypeId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarm_FarmTypeId"/>
+            </column>
+
+            <column name="FarmSpecializationId" type="INTEGER"/>
+
+            <column name="BreedingAnimalFarmActivityType" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarm_BreedingAnimalFarmActivityType"/>
+            </column>
+
+            <column name="RegionId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarm_RegionId"/>
+            </column>
+
+            <column name="AdministrativeAreaId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarm_AdministrativeAreaId"/>
+            </column>
+
+            <column name="CreatedAt" type="DATETIME" defaultValue="getdate()">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarm_CreatedAt"/>
+            </column>
+
+            <column name="CreatedBy" type="UUID">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarm_CreatedBy"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_create_breeding_animal_farm_add_fk_constraints" author="${author}">
+
+        <addForeignKeyConstraint constraintName="FK_BreedingAnimalFarm_FarmTypeId"
+                                 baseTableSchemaName="${schema}" baseTableName="BreedingAnimalFarm"
+                                 baseColumnNames="FarmTypeId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="BreedingAnimalFarmType"
+                                 referencedColumnNames="FarmTypeId"/>
+
+        <addForeignKeyConstraint constraintName="FK_BreedingAnimalFarm_FarmerAccountId"
+                                 baseTableSchemaName="${schema}" baseTableName="BreedingAnimalFarm"
+                                 baseColumnNames="FarmerId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="FarmerAccount"
+                                 referencedColumnNames="FarmerAccountId"/>
+
+        <addForeignKeyConstraint constraintName="FK_BreedingAnimalFarm_FarmSpecializationId"
+                                 baseTableSchemaName="${schema}" baseTableName="BreedingAnimalFarm"
+                                 baseColumnNames="FarmSpecializationId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="BreedingAnimalFarmSpecialization"
+                                 referencedColumnNames="FarmSpecializationId"/>
+
+        <addForeignKeyConstraint constraintName="FK_BreedingAnimalFarm_AdministrativeAreaId"
+                                 baseTableSchemaName="${schema}" baseTableName="BreedingAnimalFarm"
+                                 baseColumnNames="AdministrativeAreaId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="AdministrativeArea"
+                                 referencedColumnNames="AdministrativeAreaId"/>
+
+        <addForeignKeyConstraint constraintName="FK_BreedingAnimalFarm_RegionId"
+                                 baseTableSchemaName="${schema}" baseTableName="BreedingAnimalFarm"
+                                 baseColumnNames="RegionId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="Region"
+                                 referencedColumnNames="RegionId"/>
+
+        <addUniqueConstraint schemaName="${schema}"
+                             tableName="BreedingAnimalFarm"
+                             constraintName="UK_BreedingAnimalFarm_FarmTypeId_FarmSpecializationId_AdministrativeAreaId_FarmerId"
+                             columnNames="FarmTypeId, FarmSpecializationId, AdministrativeAreaId, FarmerId"/>
+
+        <addForeignKeyConstraint constraintName="FK_BreedingAnimalFarm_CreatedBy"
+                                 baseTableSchemaName="${schema}" baseTableName="BreedingAnimalFarm"
+                                 baseColumnNames="CreatedBy"
+                                 referencedTableSchemaName="${schema}" referencedTableName="PhysicalPerson"
+                                 referencedColumnNames="PhysicalPersonId"/>
+
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog-DMZ-149_create_final_monitoring_judgement_AUD_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="FinalMonitoringJudgement_AUD">
+
+            <column name="FinalMonitoringJudgementId" type="UUID">
+                <constraints nullable="false"
+                             notNullConstraintName="NN_FinalMonitoringJudgement_AUD_FinalMonitoringJudgementId"/>
+            </column>
+
+            <column name="Compliant" type="BOOLEAN"/>
+
+            <column name="Justification" type="NVARCHAR(2048)"/>
+
+            <column name="REV" type="BIGINT">
+                <constraints nullable="false" notNullConstraintName="NN_FinalMonitoringJudgement_AUD_REV"/>
+            </column>
+            <column name="REVTYPE " type="BIGINT">
+                <constraints nullable="false" notNullConstraintName="NN_FinalMonitoringJudgement_AUD_REVTYPE"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="FinalMonitoringJudgementId, REV"
+                       constraintName="PK_FinalMonitoringJudgement_AUD_FinalMonitoringJudgementId_REV"
+                       schemaName="${schema}"
+                       tableName="FinalMonitoringJudgement_AUD"/>
+
+        <addForeignKeyConstraint constraintName="FK_FinalMonitoringJudgement_AUD_REV"
+                                 baseTableSchemaName="${schema}"
+                                 baseTableName="FinalMonitoringJudgement_AUD"
+                                 baseColumnNames="REV"
+                                 referencedTableSchemaName="${schema}"
+                                 referencedTableName="RevInfo"
+                                 referencedColumnNames="REV"/>
+
+    </changeSet>
+
+    <changeSet id="changelog-DMZ-149_create_final_monitoring_decision_AUD_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="FinalMonitoringDecision_AUD">
+
+            <column name="FinalMonitoringDecisionId" type="UUID">
+                <constraints nullable="false"
+                             notNullConstraintName="NN_FinalMonitoringDecision_AUD_FinalMonitoringDecisionId"/>
+            </column>
+
+            <column name="Certified" type="BOOLEAN"/>
+
+            <column name="Justification" type="NVARCHAR(2048)"/>
+
+            <column name="RegisteredAt" type="TIMESTAMP"/>
+
+            <column name="REV" type="BIGINT">
+                <constraints nullable="false" notNullConstraintName="NN_FinalMonitoringDecision_AUD_REV"/>
+            </column>
+            <column name="REVTYPE " type="BIGINT">
+                <constraints nullable="false" notNullConstraintName="NN_FinalMonitoringDecision_AUD_REVTYPE"/>
+            </column>
+
+        </createTable>
+
+        <addPrimaryKey columnNames="FinalMonitoringDecisionId, REV"
+                       constraintName="PK_FinalMonitoringDecision_AUD_FinalMonitoringDecisionId_REV"
+                       schemaName="${schema}"
+                       tableName="FinalMonitoringDecision_AUD"/>
+
+        <addForeignKeyConstraint constraintName="FK_FinalMonitoringDecision_AUD_REV"
+                                 baseTableSchemaName="${schema}"
+                                 baseTableName="FinalMonitoringDecision_AUD"
+                                 baseColumnNames="REV"
+                                 referencedTableSchemaName="${schema}"
+                                 referencedTableName="RevInfo"
+                                 referencedColumnNames="REV"/>
+
+    </changeSet>
+
+
+</databaseChangeLog>

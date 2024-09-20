@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <springProperty scope="context" name="app_name" source="spring.application.name"/>
+    <springProperty scope="context" name="graylog_host" source="graylog.host"/>
+    <springProperty scope="context" name="graylog_port" source="graylog.port"/>
+
+    <appender name="gelf" class="biz.paluch.logging.gelf.logback.GelfLogbackAppender">
+        <host>udp:${graylog_host}</host>
+        <port>${graylog_port}</port>
+        <version>1.1</version>
+        <facility>animal-husbandry</facility>
+        <extractStackTrace>true</extractStackTrace>
+        <filterStackTrace>true</filterStackTrace>
+        <mdcProfiling>true</mdcProfiling>
+        <timestampPattern>yyyy-MM-dd HH:mm:ss,SSS</timestampPattern>
+        <maximumMessageSize>8192</maximumMessageSize>
+
+        <!-- This are static fields -->
+        <additionalFields>appName="Animal Husbandry"</additionalFields>
+        <!-- Optional: Specify field types -->
+        <additionalFieldTypes>appName=String</additionalFieldTypes>
+
+        <!-- This are fields using MDC -->
+        <includeFullMdc>true</includeFullMdc>
+
+        <mdcFields>mdcField1,mdcField2</mdcFields>
+        <dynamicMdcFields>mdc.*,(mdc|MDC)fields</dynamicMdcFields>
+        <dynamicMdcFieldTypes>my_field.*=String,business\..*\.field=double</dynamicMdcFieldTypes>
+
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>
+                %d{ISO8601} %highlight(%-5level) %highlight(${app_name}) %magenta([%thread]) %logger{36}.%M :%L - %msg%n
+            </pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        <file>/ktn/apps/instances/animal-husbandry/logs/eagro-animal-husbandry.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>
+                /ktn/apps/instances/animal-husbandry/logs/eagro-animal-husbandry.%d{yyyy-MM-dd}-%i.gz
+            </fileNamePattern>
+            <cleanHistoryOnStart>false</cleanHistoryOnStart>
+            <maxFileSize>20 MB</maxFileSize>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %d{ISO8601} %highlight(%-5level) %highlight(${app_name}) %magenta([%thread]) %logger{36}.%M :%L - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="gelf"/>
+    </root>
+
+    <logger name="az.animal-husbandry-api" additivity="false" level="info">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="gelf"/>
+    </logger>
+
+</configuration>

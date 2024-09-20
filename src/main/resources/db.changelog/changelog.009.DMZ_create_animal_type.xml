@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_animal_type" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="AnimalType">
+
+            <column name="AnimalTypeId" type="INTEGER">
+                <constraints primaryKey="true" primaryKeyName="PK_AnimalType_AnimalTypeId"/>
+            </column>
+
+            <column name="Name" type="NVARCHAR(255)">
+                <constraints unique="true" uniqueConstraintName="UK_AnimaType_Name" nullable="false"
+                             notNullConstraintName="NN_AnimalType_Name"/>
+            </column>
+
+            <column name="FarmTypeId" type="INTEGER" >
+                <constraints nullable="false" notNullConstraintName="NN_AnimalType_FarmTypeId"/>
+            </column>
+
+        </createTable>
+
+        <addUniqueConstraint schemaName="${schema}" tableName="AnimalType" columnNames="Name,FarmTypeId"
+
+                             constraintName="UK_AnimalType_Name_FarmTypeId" />
+
+        <addForeignKeyConstraint constraintName="FK_AnimalType_FarmTypeId"
+                                 baseTableSchemaName="${schema}" baseTableName="AnimalType"
+                                 baseColumnNames="FarmTypeId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="BreedingAnimalFarmType"
+                                 referencedColumnNames="FarmTypeId"/>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_animal_type" author="${author}">
+        <sql>
+             INSERT INTO AnimalHusbandry.AnimalType (AnimalTypeId, Name, FarmTypeId) VALUES (1, N'İnək', 1);
+             INSERT INTO AnimalHusbandry.AnimalType (AnimalTypeId, Name, FarmTypeId) VALUES (2, N'Camış', 1);
+             INSERT INTO AnimalHusbandry.AnimalType (AnimalTypeId, Name, FarmTypeId) VALUES (3, N'Qoyun', 4);
+             INSERT INTO AnimalHusbandry.AnimalType (AnimalTypeId, Name, FarmTypeId) VALUES (4, N'Keçi', 4);
+             INSERT INTO AnimalHusbandry.AnimalType (AnimalTypeId, Name, FarmTypeId) VALUES (6, N'At', 6);
+             INSERT INTO AnimalHusbandry.AnimalType (AnimalTypeId, Name, FarmTypeId) VALUES (7, N'Toyuq', 7);
+             INSERT INTO AnimalHusbandry.AnimalType (AnimalTypeId, Name, FarmTypeId) VALUES (5, N'Donuz', 5);
+             INSERT INTO AnimalHusbandry.AnimalType (AnimalTypeId, Name, FarmTypeId) VALUES (8, N'Arı', 8);
+             INSERT INTO AnimalHusbandry.AnimalType (AnimalTypeId, Name, FarmTypeId) VALUES (9, N'Dəvə', 2);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

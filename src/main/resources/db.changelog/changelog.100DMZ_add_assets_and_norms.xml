@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_add_assets" author="${author}">
+
+                  <sql>
+                      INSERT INTO AnimalHusbandry.Asset(AssetId, Name) values ( 1, N'Tövlə');
+                      INSERT INTO AnimalHusbandry.Asset(AssetId, Name) values ( 2, N'Köməkçi bina');
+                      INSERT INTO AnimalHusbandry.Asset(AssetId, Name) values ( 3, N'Karantin izalyatoru');
+                      INSERT INTO AnimalHusbandry.Asset(AssetId, Name) values ( 4, N'Yem bazası');
+                      INSERT INTO AnimalHusbandry.Asset(AssetId, Name) values ( 5, N'Texnika və avadanlıqlar');
+                      INSERT INTO AnimalHusbandry.Asset(AssetId, Name) values ( 6, N'Süni mayalandırma otağı');
+                      INSERT INTO AnimalHusbandry.Asset(AssetId, Name) values ( 7, N'Müalicəxana');
+                      INSERT INTO AnimalHusbandry.Asset(AssetId, Name) values ( 8, N'Yem istehsalı sexi');
+                      INSERT INTO AnimalHusbandry.Asset(AssetId, Name) values ( 9, N'Təmiz su ilə təchizat');
+                      INSERT INTO AnimalHusbandry.Asset(AssetId, Name) values ( 10, N'Dezobaryer');
+                      INSERT INTO AnimalHusbandry.Asset(AssetId, Name) values ( 11, N'Aptek');
+                      INSERT INTO AnimalHusbandry.Asset(AssetId, Name) values ( 12, N'Sağımxana');
+                  </sql>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_cattle_beef_assets" author="${author}">
+
+        <sql>
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (1, 1, 1, 1, 1, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (2, 2, 1, 1, 1, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (3, 3, 1, 1, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (4, 4, 1, 1, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (5, 5, 1, 1, 0, N'Kənd təsərrüfatı texnikası və avadanlıqları');
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (6, 6, 1, 1, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (7, 7, 1, 1, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (8, 8, 1, 1, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (9, 9, 1, 1, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (10, 10, 1, 1, 1, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (11, 11, 1, 1, 0, NULL);
+        </sql>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_cattle_milk_norms" author="${author}">
+
+        <sql>
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (12, 1, 1, 2, 1, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (13, 2, 1, 2, 1, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (14, 3, 1, 2, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (15, 4, 1, 2, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (16, 5, 1, 2, 0, N'Kənd təsərrüfatı texnikası və avadanlıqları');
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (17, 6, 1, 2, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (18, 7, 1, 2, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (19, 8, 1, 2, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (20, 9, 1, 2, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (21, 10, 1, 2, 1, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (22, 11, 1, 2, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (23, 12, 1, 2, 0, NULL);
+        </sql>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_cattle_milk_beef_norms" author="${author}">
+
+        <sql>
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (24, 1, 1, 8, 1, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (25, 2, 1, 8, 1, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (26, 3, 1, 8, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (27, 4, 1, 8, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (28, 5, 1, 8, 0, N'Kənd təsərrüfatı texnikası və avadanlıqları');
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (29, 6, 1, 8, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (30, 7, 1, 8, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (31, 8, 1, 8, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (32, 9, 1, 8, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (33, 10, 1, 8, 1, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (34, 11, 1, 8, 0, NULL);
+            INSERT INTO AnimalHusbandry.Norm(ConfigurationId, AssetId, FarmTypeId, FarmSpecializationId, Mandatory, Note) values (35, 12, 1, 8, 0, NULL);
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>

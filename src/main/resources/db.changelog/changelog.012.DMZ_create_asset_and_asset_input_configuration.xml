@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_asset" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="Asset">
+
+            <column name="AssetId" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_Asset_AssetId"/>
+            </column>
+
+            <column name="Name" type="NVARCHAR(500)">
+                <constraints unique="true" uniqueConstraintName="UK_Asset_Name" nullable="false"
+                             notNullConstraintName="NN_Asset_Name"/>
+            </column>
+
+            <column name="CreatedAt" type="DATETIME" defaultValue="GETDATE()">
+                <constraints nullable="false" notNullConstraintName="NN_Asset_CreatedAt"/>
+            </column>
+
+            <column name="CreatedBy" type="UUID">
+                <constraints nullable="false" notNullConstraintName="NN_Asset_CreatedBy"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="FK_Asset_CreatedBy"
+                                 baseTableSchemaName="${schema}" baseTableName="Asset"
+                                 baseColumnNames="CreatedBy"
+                                 referencedTableSchemaName="${schema}" referencedTableName="PhysicalPerson"
+                                 referencedColumnNames="PhysicalPersonId"/>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_create_asset_input_configuration" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="AssetInputConfiguration">
+
+            <column name="ConfigurationId" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_AssetInputConfiguration_NormId"/>
+            </column>
+
+            <column name="AssetId" type="Integer">
+                <constraints nullable="false" notNullConstraintName="NN_AssetInputConfiguration_AssetId"/>
+            </column>
+
+            <column name="FarmTypeId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_AssetInputConfiguration_AnimalTypeId"/>
+            </column>
+
+            <column name="FarmSpecializationId" type="INTEGER"/>
+
+            <column name="Mandatory" type="BIT" defaultValue="0">
+                <constraints nullable="false" notNullConstraintName="NN_AssetInputConfiguration_Mandatory"/>
+            </column>
+
+            <column name="Description" type="NVARCHAR(1000)"/>
+
+        </createTable>
+
+        <addUniqueConstraint schemaName="${schema}" tableName="AssetInputConfiguration"
+                             columnNames="AssetId,FarmTypeId,FarmSpecializationId"
+
+                             constraintName="UK_AssetInputConfiguration_AssetId_FarmTypeId_FarmSpecializationId"/>
+
+        <addForeignKeyConstraint constraintName="FK_AssetInputConfiguration_FarmTypeId"
+                                 baseTableSchemaName="${schema}" baseTableName="AssetInputConfiguration"
+                                 baseColumnNames="FarmTypeId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="BreedingAnimalFarmType"
+                                 referencedColumnNames="FarmTypeId"/>
+
+        <addForeignKeyConstraint constraintName="FK_AssetInputConfiguration_FarmSpecializationId"
+                                 baseTableSchemaName="${schema}" baseTableName="AssetInputConfiguration"
+                                 baseColumnNames="FarmSpecializationId"
+                                 referencedTableSchemaName="${schema}"
+                                 referencedTableName="BreedingAnimalFarmSpecialization"
+                                 referencedColumnNames="FarmSpecializationId"/>
+
+        <addForeignKeyConstraint constraintName="FK_AssetInputConfiguration_AssetId"
+                                 baseTableSchemaName="${schema}" baseTableName="AssetInputConfiguration"
+                                 baseColumnNames="AssetId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="Asset"
+                                 referencedColumnNames="AssetId"/>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_application_asset" author="${author}">
+        <createTable schemaName="${schema}" tableName="ApplicationAsset">
+
+            <column name="AssetId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_ApplicationAsset_AssetId"/>
+            </column>
+
+            <column name="ApplicationId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_ApplicationAsset_ApplicationId"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="FK_ApplicationAsset_ApplicationId"
+                                 baseTableSchemaName="${schema}" baseTableName="ApplicationAsset"
+                                 baseColumnNames="ApplicationId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="CertificationApplication"
+                                 referencedColumnNames="ApplicationId"/>
+
+        <addForeignKeyConstraint constraintName="FK_ApplicationAsset_AssetId"
+                                 baseTableSchemaName="${schema}" baseTableName="ApplicationAsset"
+                                 baseColumnNames="AssetId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="Asset"
+                                 referencedColumnNames="AssetId"/>
+
+    </changeSet>
+
+
+</databaseChangeLog>

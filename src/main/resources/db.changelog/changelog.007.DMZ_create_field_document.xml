@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_extract_act" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="FieldDocument">
+
+
+            <column name="FieldDocumentId" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_FieldDocument_Id"/>
+            </column>
+
+            <column name="ExternalActId" type="INTEGER">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="FarmId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_FieldDocument_FarmId"/>
+            </column>
+
+            <column name="FieldName" type="NVARCHAR(255)"/>
+
+            <column name="FieldUUID" type="NVARCHAR(255)"/>
+
+            <column name="SpaceHa" type="DECIMAL(18, 6)"/>
+
+            <column name="RegistryNumber" type="NVARCHAR(255)"/>
+
+            <column name="RegistrationNumber" type="NVARCHAR(255)"/>
+
+            <column name="DocumentClassification" type="NVARCHAR(255)"/>
+
+            <column name="DocumentType" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_Act_DocumentType"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="FK_FieldDocument_FarmId"
+                                 baseTableSchemaName="${schema}" baseTableName="FieldDocument"
+                                 baseColumnNames="FarmId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="BreedingAnimalFarm"
+                                 referencedColumnNames="FarmId"/>
+    </changeSet>
+
+</databaseChangeLog>

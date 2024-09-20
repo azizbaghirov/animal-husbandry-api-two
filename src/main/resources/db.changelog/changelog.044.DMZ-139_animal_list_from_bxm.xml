@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_add_column_to_breeding_animal_farm_type_table" author="${author}">
+
+        <addColumn schemaName="${schema}" tableName="BreedingAnimalFarmType">
+            <column name="AnimalCategory" type="INTEGER"/>
+        </addColumn>
+
+        <update schemaName="${schema}" tableName="BreedingAnimalFarmType">
+            <column name="AnimalCategory" value="1"/>
+            <where>Label = 'CATTLE_BREEDING'</where>
+        </update>
+
+        <update schemaName="${schema}" tableName="BreedingAnimalFarmType">
+            <column name="AnimalCategory" value="2"/>
+            <column name="Label" value="SMALL_RUMINANT_BREEDING"/>
+            <where>Label = 'SMALL_HORNED_BREEDING'</where>
+        </update>
+
+        <update schemaName="${schema}" tableName="BreedingAnimalFarmType">
+            <column name="AnimalCategory" value="5"/>
+            <where>Label = 'AVICULTURE'</where>
+        </update>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_column_to_breeding_animal_farm_specialization_table" author="${author}">
+
+        <addColumn schemaName="${schema}" tableName="BreedingAnimalFarmSpecialization">
+            <column name="AnimalProductivityDirection" type="INTEGER"/>
+        </addColumn>
+
+        <update schemaName="${schema}" tableName="BreedingAnimalFarmSpecialization">
+            <column name="AnimalProductivityDirection" value="1"/>
+            <where>FarmSpecializationId = 1</where>
+        </update>
+
+        <update schemaName="${schema}" tableName="BreedingAnimalFarmSpecialization">
+            <column name="AnimalProductivityDirection" value="2"/>
+            <where>FarmSpecializationId = 2</where>
+        </update>
+
+        <update schemaName="${schema}" tableName="BreedingAnimalFarmSpecialization">
+            <column name="AnimalProductivityDirection" value="4"/>
+            <where>FarmSpecializationId = 3</where>
+        </update>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_column_to_animal_type_table" author="${author}">
+
+        <addColumn schemaName="${schema}" tableName="AnimalType">
+            <column name="AnimalType" type="INTEGER"/>
+        </addColumn>
+
+        <update schemaName="${schema}" tableName="AnimalType">
+            <column name="AnimalType" value="1"/>
+            <where>AnimalTypeId = 1</where>
+        </update>
+
+        <update schemaName="${schema}" tableName="AnimalType">
+            <column name="AnimalType" value="2"/>
+            <where>AnimalTypeId = 2</where>
+        </update>
+
+        <update schemaName="${schema}" tableName="AnimalType">
+            <column name="AnimalType" value="4"/>
+            <where>AnimalTypeId = 3</where>
+        </update>
+
+        <update schemaName="${schema}" tableName="AnimalType">
+            <column name="AnimalType" value="5"/>
+            <where>AnimalTypeId = 4</where>
+        </update>
+
+        <update schemaName="${schema}" tableName="AnimalType">
+            <column name="AnimalType" value="18"/>
+            <where>AnimalTypeId = 7</where>
+        </update>
+
+    </changeSet>
+
+</databaseChangeLog>

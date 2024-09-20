@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_physical_person_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="PhysicalPerson">
+
+            <column name="PhysicalPersonId" type="UUID">
+                <constraints primaryKey="true" primaryKeyName="PK_PhysicalPerson_PhysicalPersonId"/>
+            </column>
+
+            <column name="PersonalIdentificationNumber" type="NVARCHAR(7)">
+                <constraints unique="true" uniqueConstraintName="UK_PhysicalPerson_PersonalIdentificationNumber"
+                             nullable="false"
+                             notNullConstraintName="NN_PhysicalPerson_PersonalIdentificationNumber"/>
+            </column>
+
+            <column name="TaxPayerIdentificationNumber" type="NVARCHAR(255)"/>
+
+            <column name="Name" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_PhysicalPerson_Name"/>
+            </column>
+
+            <column name="Surname" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_PhysicalPerson_Surname"/>
+            </column>
+
+            <column name="Patronymic" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_PhysicalPerson_Patronymic"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_create_legal_person_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="LegalPerson">
+
+            <column name="LegalPersonId" type="UUID">
+                <constraints primaryKey="true" primaryKeyName="PK_LegalPerson_LegalPersonId"/>
+            </column>
+
+            <column name="LegalPersonName" type="NVARCHAR(1000)">
+                <constraints nullable="false" notNullConstraintName="NN_LegalPerson_LegalPersonName"/>
+            </column>
+
+            <column name="TaxPayerIdentificationNumber" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_LegalPerson_TaxPayerIdentificationNumber"
+                             unique="true" uniqueConstraintName="UK_LegalPerson_TaxPayerIdentificationNumber"/>
+            </column>
+
+            <column name="HasStamp" type="BIT">
+                <constraints nullable="false" notNullConstraintName="NN_LegalPerson_HasStamp"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_create_farmer_account_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="FarmerAccount">
+
+            <column name="FarmerAccountId" type="UUID">
+                <constraints primaryKey="true" primaryKeyName="PK_FarmerAccount_FarmerAccountId"/>
+            </column>
+
+            <column name="FarmerAccountType" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_FarmerAccount_FarmerAccountType"/>
+            </column>
+
+            <column name="PhysicalPersonId" type="UUID">
+                <constraints nullable="false" notNullConstraintName="NN_FarmerAccount_PhysicalPerson"/>
+            </column>
+
+            <column name="LegalPersonId" type="UUID"/>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="FK_FarmerAccount_PhysicalPersonId"
+                                 baseTableSchemaName="${schema}" baseTableName="FarmerAccount"
+                                 baseColumnNames="PhysicalPersonId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="PhysicalPerson"
+                                 referencedColumnNames="PhysicalPersonId"/>
+
+        <addForeignKeyConstraint constraintName="FK_FarmerAccount_LegalPersonId"
+                                 baseTableSchemaName="${schema}" baseTableName="FarmerAccount"
+                                 baseColumnNames="LegalPersonId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="LegalPerson"
+                                 referencedColumnNames="LegalPersonId"/>
+
+    </changeSet>
+
+</databaseChangeLog>

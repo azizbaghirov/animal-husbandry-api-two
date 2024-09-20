@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_measurement_unit_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="MeasurementUnit">
+
+            <column name="MeasurementUnitId" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_MeasurementUnit_MeasurementUnitId"/>
+            </column>
+
+            <column name="Label" type="NVARCHAR(32)">
+                <constraints
+                        nullable="false" notNullConstraintName="NN_MeasurementUnit_Label"
+                        unique="true" uniqueConstraintName="UK_MeasurementUnit_Label"/>
+            </column>
+
+            <column name="Name" type="NVARCHAR(32)">
+                <constraints
+                        nullable="false" notNullConstraintName="NN_MeasurementUnit_Name"
+                        unique="true" uniqueConstraintName="UK_MeasurementUnit_Name"/>
+            </column>
+
+            <column name="Description" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_MeasurementUnit_Description"/>
+            </column>
+
+        </createTable>
+
+        <createIndex indexName="IX_MeasurementUnit_Name" schemaName="${schema}" tableName="MeasurementUnit">
+            <column name="Name"/>
+        </createIndex>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_measurement_unit_fill" author="${author}">
+
+        <sql>
+            INSERT INTO AnimalHusbandry.MeasurementUnit (Label, Name, Description)
+            VALUES (N'kilogramme', N'kg', N'1000 q çəkiyə bərabər ölçü vahidi'),
+                   (N'liter', N'l', N'1000 kub santimetrə bərabər maye ölçüsü'),
+                   (N'unit', N'ədəd', N'Bir vahidə barəbər ölçü vahidi'),
+                   (N'percent', N'%', N'Nisbi ölçü göstəricisi'),
+                   (N'boolean', N'true\false', N'Doğru (true) və ya yalan (false) dəyərə malik olan məntiqi tip');
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>

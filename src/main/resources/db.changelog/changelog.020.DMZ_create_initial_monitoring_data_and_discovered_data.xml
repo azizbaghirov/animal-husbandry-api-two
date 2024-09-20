@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_initial_monitoring_data_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="InitialMonitoringData">
+
+            <column name="InitialMonitoringDataId" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_InitialMonitoringData_InitialMonitoringDataId"/>
+            </column>
+
+            <column name="InitialMonitoringDecisionId" type="INTEGER">
+                <constraints nullable="false"
+                             notNullConstraintName="NN_InitialMonitoringData_InitialMonitoringDecisionId"/>
+            </column>
+
+            <column name="Disinfected" type="BIT" defaultValue="0">
+                <constraints nullable="false" notNullConstraintName="NN_InitialMonitoringData_Disinfected"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="FK_InitialMonitoringData_InitialMonitoringDecisionId"
+                                 baseTableSchemaName="${schema}" baseTableName="InitialMonitoringData"
+                                 baseColumnNames="InitialMonitoringDecisionId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="InitialMonitoringDecision"
+                                 referencedColumnNames="InitialMonitoringDecisionId"/>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_create_discovered_data_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="DiscoveredData">
+
+            <column name="DiscoveredDataId" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_DiscoveredData_DiscoveredDataId"/>
+            </column>
+
+            <column name="DiscoveredFieldValueId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_DiscoveredData_DiscoveredFieldValueId"/>
+            </column>
+
+            <column name="DeclaredFieldValueId" type="INTEGER"/>
+
+            <column name="ValuesEqual" type="BIT" defaultValue="0">
+                <constraints nullable="false" notNullConstraintName="NN_DiscoveredData_ValuesEqual"/>
+            </column>
+
+            <column name="InitialMonitoringDataId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_DiscoveredData_InitialMonitoringDataId"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="FK_DiscoveredData_DiscoveredFieldValueId"
+                                 baseTableSchemaName="${schema}" baseTableName="DiscoveredData"
+                                 baseColumnNames="DiscoveredFieldValueId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="FieldValue"
+                                 referencedColumnNames="FieldValueId"/>
+
+        <addForeignKeyConstraint constraintName="FK_DiscoveredData_DeclaredFieldValueId"
+                                 baseTableSchemaName="${schema}" baseTableName="DiscoveredData"
+                                 baseColumnNames="DeclaredFieldValueId"
+                                 referencedTableSchemaName="${schema}"
+                                 referencedTableName="FieldValue"
+                                 referencedColumnNames="FieldValueId"/>
+
+        <addForeignKeyConstraint constraintName="FK_DiscoveredData_InitialMonitoringDataId"
+                                 baseTableSchemaName="${schema}" baseTableName="DiscoveredData"
+                                 baseColumnNames="InitialMonitoringDataId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="InitialMonitoringData"
+                                 referencedColumnNames="InitialMonitoringDataId"/>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_create_initial_monitoring_data_and_vaccination_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="InitialMonitoringDataVaccination">
+
+            <column name="InitialMonitoringDataId" type="INTEGER">
+                <constraints nullable="false"
+                             notNullConstraintName="NN_InitialMonitoringDataVaccination_InitialMonitoringDataId"/>
+            </column>
+
+            <column name="VaccinationId" type="INTEGER">
+                <constraints nullable="false"
+                             notNullConstraintName="NN_InitialMonitoringDataVaccination_VaccinationId"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+                constraintName="FK_InitialMonitoringDataVaccination_VaccinationId"
+                baseTableSchemaName="${schema}" baseTableName="InitialMonitoringDataVaccination"
+                baseColumnNames="VaccinationId"
+                referencedTableSchemaName="${schema}" referencedTableName="Vaccination"
+                referencedColumnNames="VaccinationId"/>
+
+        <addForeignKeyConstraint
+                constraintName="FK_InitialMonitoringDataVaccination_InitialMonitoringDataId"
+                baseTableSchemaName="${schema}" baseTableName="InitialMonitoringDataVaccination"
+                baseColumnNames="InitialMonitoringDataId"
+                referencedTableSchemaName="${schema}" referencedTableName="InitialMonitoringData"
+                referencedColumnNames="InitialMonitoringDataId"/>
+
+    </changeSet>
+
+
+</databaseChangeLog>

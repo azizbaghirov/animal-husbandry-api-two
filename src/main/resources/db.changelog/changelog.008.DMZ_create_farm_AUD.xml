@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_007_create_revinfo-audit-table" author="${author}">
+        <createTable schemaName="${schema}" tableName="RevInfo">
+            <column name="REV" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_RevInfo_REV"/>
+            </column>
+            <column name="RevisionTimestamp" type="DATETIME" defaultValue="CURRENT_TIMESTAMP">
+                <constraints nullable="false" notNullConstraintName="NN_RevInfo_RevisionTimestamp"/>
+            </column>
+            <column name="CreatedBy" type="UUID">
+                <constraints nullable="false" notNullConstraintName="NN_RevInfo_CreatedBy"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="changelog-DMZ_007_create_breeding_animal_farm_AUD_table" author="${author}">
+        <createTable schemaName="${schema}" tableName="BreedingAnimalFarm_AUD">
+            <column name="FarmId" type="BIGINT">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarm_AUD_FarmId"/>
+            </column>
+            <column name="REV" type="BIGINT">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarm_AUD_REV"/>
+            </column>
+            <column name="REVTYPE " type="BIGINT">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarm_AUD_REVTYPE"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="FarmId, REV"
+                       constraintName="PK_BreedingAnimalFarm_AUD_FarmId_REV"
+                       schemaName="${schema}"
+                       tableName="BreedingAnimalFarm_AUD"/>
+
+        <addForeignKeyConstraint constraintName="FK_BreedingAnimalFarm_AUD_REV"
+                                 baseTableSchemaName="${schema}"
+                                 baseTableName="BreedingAnimalFarm_AUD"
+                                 baseColumnNames="REV"
+                                 referencedTableSchemaName="${schema}"
+                                 referencedTableName="RevInfo"
+                                 referencedColumnNames="REV"/>
+
+        <addForeignKeyConstraint constraintName="FK_RevInfo_CreatedBy"
+                                 baseTableSchemaName="${schema}"
+                                 baseTableName="RevInfo"
+                                 baseColumnNames="CreatedBy"
+                                 referencedTableSchemaName="${schema}"
+                                 referencedTableName="PhysicalPerson"
+                                 referencedColumnNames="PhysicalPersonId"/>
+
+    </changeSet>
+
+</databaseChangeLog>

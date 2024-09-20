@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_region" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="Region">
+
+            <column name="RegionId" type="INTEGER">
+                <constraints primaryKey="true" primaryKeyName="PK_Region_RegionId"/>
+            </column>
+
+            <column name="Name" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_Region_Name"/>
+            </column>
+
+            <column name="Code" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_Region_Code"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>

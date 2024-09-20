@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_operator_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="Operator">
+
+            <column name="OperatorId" type="UUID">
+                <constraints primaryKey="true" primaryKeyName="PK_Operator_OperatorId"/>
+            </column>
+
+            <column name="PersonalIdentificationNumber" type="NVARCHAR(7)">
+                <constraints unique="true" uniqueConstraintName="UK_Operator_PersonalIdentificationNumber"
+                             nullable="false"
+                             notNullConstraintName="NN_Operator_PersonalIdentificationNumber"/>
+            </column>
+
+            <column name="Name" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_Operator_Name"/>
+            </column>
+
+            <column name="Surname" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_Operator_Surname"/>
+            </column>
+
+            <column name="Patronymic" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_Operator_Patronymic"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_create_granted_authority_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="GrantedAuthority">
+
+            <column name="GrantedAuthorityId" type="UUID">
+                <constraints primaryKey="true" primaryKeyName="PK_GrantedAuthority_GrantedAuthorityId"/>
+            </column>
+
+            <column name="Role" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_GrantedAuthority_Role"/>
+            </column>
+
+            <column name="OperatorId" type="UUID">
+                <constraints nullable="false" notNullConstraintName="NN_GrantedAuthority_OperatorId"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="FK_GrantedAuthority_OperatorId"
+                                 baseTableSchemaName="${schema}" baseTableName="GrantedAuthority"
+                                 baseColumnNames="OperatorId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="Operator"
+                                 referencedColumnNames="OperatorId"/>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_create_operator_region_table" author="${author}">
+        <createTable schemaName="${schema}" tableName="OperatorRegion">
+
+            <column name="OperatorId" type="UUID">
+                <constraints nullable="false" notNullConstraintName="NN_OperatorRegion_OperatorId"/>
+            </column>
+
+            <column name="RegionId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_OperatorRegion_RegionId"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="FK_OperatorRegion_OperatorId"
+                                 baseTableSchemaName="${schema}" baseTableName="OperatorRegion"
+                                 baseColumnNames="OperatorId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="Operator"
+                                 referencedColumnNames="OperatorId"/>
+
+        <addForeignKeyConstraint constraintName="FK_OperatorRegion_RegionId"
+                                 baseTableSchemaName="${schema}" baseTableName="OperatorRegion"
+                                 baseColumnNames="RegionId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="Region"
+                                 referencedColumnNames="RegionId"/>
+
+    </changeSet>
+
+
+</databaseChangeLog>

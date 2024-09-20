@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.changelog.021.DMZ-70_certification-1" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="FinalMonitoringDecision">
+
+            <column name="FinalMonitoringDecisionId" type="UUID">
+                <constraints primaryKey="true" primaryKeyName="PK_FinalMonitoringDecision"/>
+            </column>
+
+            <column name="CertificationApplicationId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_FinalMonitoringDecision_CertificationApplicationId"/>
+            </column>
+
+            <column name="Certified" type="BOOLEAN">
+                <constraints nullable="false" notNullConstraintName="NN_FinalMonitoringDecision_Certified"/>
+            </column>
+
+            <column name="Justification" type="NVARCHAR(2048)">
+                <constraints nullable="false" notNullConstraintName="NN_FinalMonitoringDecision_Justification"/>
+            </column>
+
+            <column name="CreatedBy" type="UUID">
+                <constraints nullable="false" notNullConstraintName="NN_FinalMonitoringDecision_CreatedBy"/>
+            </column>
+
+            <column name="CreatedAt" type="TIMESTAMP">
+                <constraints nullable="false" notNullConstraintName="NN_FinalMonitoringDecision_CreatedAt"/>
+            </column>
+
+            <column name="InvalidatedBy" type="UUID"/>
+            <column name="InvalidatedAt" type="TIMESTAMP"/>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+                constraintName="FK_FinalMonitoringDecision_CertificationApplicationId"
+                baseTableSchemaName="${schema}" baseTableName="FinalMonitoringDecision" baseColumnNames="CertificationApplicationId"
+                referencedTableSchemaName="${schema}" referencedTableName="CertificationApplication" referencedColumnNames="ApplicationId"
+        />
+
+        <addForeignKeyConstraint
+                constraintName="FK_FinalMonitoringDecision_CreatedBy"
+                baseTableSchemaName="${schema}" baseTableName="FinalMonitoringDecision" baseColumnNames="CreatedBy"
+                referencedTableSchemaName="${schema}" referencedTableName="Operator" referencedColumnNames="OperatorId"
+        />
+
+        <addForeignKeyConstraint
+                constraintName="FK_FinalMonitoringDecision_InvalidatedBy"
+                baseTableSchemaName="${schema}" baseTableName="FinalMonitoringDecision" baseColumnNames="InvalidatedBy"
+                referencedTableSchemaName="${schema}" referencedTableName="Operator" referencedColumnNames="OperatorId"
+        />
+
+        <createTable schemaName="${schema}" tableName="BreedingAnimalFarmCertificate">
+
+            <column name="BreedingAnimalFarmCertificateId" type="UUID">
+                <constraints primaryKey="true" primaryKeyName="PK_BreedingAnimalFarmCertificate_BreedingAnimalFarmCertificateId"/>
+            </column>
+
+            <column name="CertificationApplicationId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarmCertificate_CertificationApplicationId"/>
+            </column>
+
+            <column name="FinalMonitoringDecisionId" type="UUID">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarmCertificate_FinalMonitoringDecisionId"/>
+            </column>
+
+            <column name="RegistrationNumber" type="NVARCHAR(32)">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarmCertificate_RegistrationNumber"/>
+            </column>
+
+            <column name="FarmerAccountId" type="UUID">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarmCertificate_FarmerAccountId"/>
+            </column>
+
+            <column name="BreedingAnimalFarmTypeId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarmCertificate_BreedingAnimalFarmTypeId"/>
+            </column>
+
+            <column name="BreedingAnimalFarmSpecializationId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarmCertificate_BreedingAnimalFarmSpecializationId"/>
+            </column>
+
+            <column name="RegionId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarmCertificate_RegionId"/>
+            </column>
+
+            <column name="AdministrativeAreaId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarmCertificate_AdministrativeAreaId"/>
+            </column>
+
+            <column name="CertificationDate" type="DATE">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarmCertificate_CertificationDate"/>
+            </column>
+
+            <column name="ExpirationDate" type="DATE">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarmCertificate_ExpirationDate"/>
+            </column>
+
+            <column name="InvalidatedAt" type="TIMESTAMP"/>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+                constraintName="FK_BreedingAnimalFarmCertificate_CertificationApplicationId"
+                baseTableSchemaName="${schema}" referencedTableSchemaName="${schema}"
+                baseTableName="BreedingAnimalFarmCertificate" baseColumnNames="CertificationApplicationId"
+                referencedTableName="CertificationApplication" referencedColumnNames="ApplicationId"
+        />
+
+        <addForeignKeyConstraint
+                constraintName="FK_BreedingAnimalFarmCertificate_FinalMonitoringDecisionId"
+                baseTableSchemaName="${schema}" referencedTableSchemaName="${schema}"
+                baseTableName="BreedingAnimalFarmCertificate" baseColumnNames="FinalMonitoringDecisionId"
+                referencedTableName="FinalMonitoringDecision" referencedColumnNames="FinalMonitoringDecisionId"
+        />
+
+        <addForeignKeyConstraint
+                constraintName="FK_BreedingAnimalFarmCertificate_FarmerAccountId"
+                baseTableSchemaName="${schema}" referencedTableSchemaName="${schema}"
+                baseTableName="BreedingAnimalFarmCertificate" baseColumnNames="FarmerAccountId"
+                referencedTableName="FarmerAccount" referencedColumnNames="FarmerAccountId"
+        />
+
+        <addForeignKeyConstraint
+                constraintName="FK_BreedingAnimalFarmCertificate_BreedingAnimalFarmTypeId"
+                baseTableSchemaName="${schema}" referencedTableSchemaName="${schema}"
+                baseTableName="BreedingAnimalFarmCertificate" baseColumnNames="BreedingAnimalFarmTypeId"
+                referencedTableName="BreedingAnimalFarmType" referencedColumnNames="FarmTypeId"
+        />
+
+        <addForeignKeyConstraint
+                constraintName="FK_BreedingAnimalFarmCertificate_BreedingAnimalFarmSpecializationId"
+                baseTableSchemaName="${schema}" referencedTableSchemaName="${schema}"
+                baseTableName="BreedingAnimalFarmCertificate" baseColumnNames="BreedingAnimalFarmSpecializationId"
+                referencedTableName="BreedingAnimalFarmSpecialization" referencedColumnNames="FarmSpecializationId"
+        />
+
+    </changeSet>
+
+</databaseChangeLog>

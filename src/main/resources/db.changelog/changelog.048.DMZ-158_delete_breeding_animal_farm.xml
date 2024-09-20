@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_add_column_to_breeding_animal_farm_table" author="${author}">
+
+        <addColumn schemaName="${schema}" tableName="BreedingAnimalFarm">
+            <column name="Deletable" type="BIT" defaultValue="1"/>
+        </addColumn>
+
+        <addColumn schemaName="${schema}" tableName="BreedingAnimalFarm">
+            <column name="DeletedAt" type="TIMESTAMP"/>
+        </addColumn>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_update_column_deletable_in_breeding_animal_farm_table" author="${author}">
+
+        <update schemaName="${schema}" tableName="BreedingAnimalFarm">
+            <column name="Deletable" value="1"/>
+            <where>Deletable is null</where>
+        </update>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_rewrite_column_constraint_breeding_animal_farm" author="${author}">
+
+        <dropUniqueConstraint schemaName="${schema}" tableName="BreedingAnimalFarm"
+                              constraintName="UK_BreedingAnimalFarm_FarmTypeId_FarmSpecializationId_AdministrativeAreaId_FarmerId"/>
+
+        <sql>
+            CREATE
+                UNIQUE INDEX UK_BreedingAnimalFarm_FarmTypeId_FarmSpecializationId_AdministrativeAreaId_FarmerId
+                ON AnimalHusbandry.BreedingAnimalFarm (FarmTypeId, FarmSpecializationId, AdministrativeAreaId, FarmerId) WHERE DeletedAt IS NULL;
+        </sql>
+
+
+    </changeSet>
+
+</databaseChangeLog>

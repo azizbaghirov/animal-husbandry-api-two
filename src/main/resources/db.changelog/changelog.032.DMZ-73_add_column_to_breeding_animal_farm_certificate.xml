@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_add_registry_file_id_to_breeding_animal_farm_certificate_table" author="${author}">
+
+        <addColumn schemaName="${schema}" tableName="BreedingAnimalFarmCertificate">
+            <column name="RegistryFileId" type="UUID"/>
+        </addColumn>
+
+        <addColumn schemaName="${schema}" tableName="BreedingAnimalFarmCertificate">
+            <column name="ApplicationNumber" type="NVARCHAR(5)"/>
+        </addColumn>
+
+        <addForeignKeyConstraint constraintName="FK_BreedingAnimalFarmCertificate_RegistryFileId"
+                                 baseTableSchemaName="${schema}" baseTableName="BreedingAnimalFarmCertificate"
+                                 baseColumnNames="RegistryFileId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="FilePathContainer"
+                                 referencedColumnNames="FileId"/>
+
+        <addForeignKeyConstraint constraintName="FK_BreedingAnimalFarmCertificate_AdministrativeAreaId"
+                                 baseTableSchemaName="${schema}" baseTableName="BreedingAnimalFarmCertificate"
+                                 baseColumnNames="AdministrativeAreaId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="AdministrativeArea"
+                                 referencedColumnNames="AdministrativeAreaId"/>
+
+        <addForeignKeyConstraint constraintName="FK_BreedingAnimalFarmCertificate_RegionId"
+                                 baseTableSchemaName="${schema}" baseTableName="BreedingAnimalFarmCertificate"
+                                 baseColumnNames="RegionId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="Region"
+                                 referencedColumnNames="RegionId"/>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_current_address_breeding_animal_farm_table" author="${author}">
+
+        <addColumn schemaName="${schema}" tableName="BreedingAnimalFarm">
+            <column name="CurrentAddress" type="NVARCHAR(500)"/>
+        </addColumn>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_farm_activity_type_to_breeding_animal_farm_certificate_table" author="${author}">
+
+        <addColumn schemaName="${schema}" tableName="BreedingAnimalFarmCertificate">
+            <column name="BreedingAnimalFarmActivityType" type="NVARCHAR(255)"/>
+        </addColumn>
+
+    </changeSet>
+
+</databaseChangeLog>

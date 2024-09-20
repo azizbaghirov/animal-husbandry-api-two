@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_certification_application_data_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="CertificationApplicationData">
+
+            <column name="ApplicationDataId" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_CertificationApplicationData_ApplicationDataId"/>
+            </column>
+
+            <column name="ApplicationId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_CertificationApplicationData_ApplicationId"/>
+            </column>
+
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_create_field_value_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="FieldValue">
+
+            <column name="FieldValueId" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_FieldValue_FieldId"/>
+            </column>
+
+            <column name="FieldId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_FieldValue_FieldId"/>
+            </column>
+
+            <column name="IntValue" type="INTEGER"/>
+
+            <column name="TextValue" type="NVARCHAR(MAX)"/>
+
+            <column name="BooleanValue" type="BIT"/>
+
+            <column name="DecimalValue" type="DECIMAL(18, 6)"/>
+
+            <column name="ObjectIdValue" type="NVARCHAR(255)"/>
+
+            <column name="ObjectNameValue" type="NVARCHAR(255)"/>
+
+            <column name="ApplicationDataId" type="INTEGER"/>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="FK_FieldValue_FieldId"
+                                 baseTableSchemaName="${schema}" baseTableName="FieldValue"
+                                 baseColumnNames="FieldId"
+                                 referencedTableSchemaName="${schema}"
+                                 referencedTableName="Field"
+                                 referencedColumnNames="FieldId"/>
+
+        <addForeignKeyConstraint constraintName="FK_FieldValue_ApplicationDataId"
+                                 baseTableSchemaName="${schema}" baseTableName="FieldValue"
+                                 baseColumnNames="ApplicationDataId"
+                                 referencedTableSchemaName="${schema}"
+                                 referencedTableName="CertificationApplicationData"
+                                 referencedColumnNames="ApplicationDataId"/>
+
+    </changeSet>
+
+</databaseChangeLog>

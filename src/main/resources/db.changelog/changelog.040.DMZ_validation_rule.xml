@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_field_validation_rule_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="FieldValidationRule">
+
+            <column name="FieldValidationRuleId" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_FieldValidationRule_FieldValidationRuleId"/>
+            </column>
+
+            <column name="ValidationRule" type="NVARCHAR(128)">
+                <constraints nullable="false" notNullConstraintName="NN_FieldValidationRule_ValidationRule"/>
+            </column>
+
+            <column name="Message" type="NVARCHAR(1024)"/>
+
+            <column name="MinInteger" type="INTEGER"/>
+
+            <column name="MaxInteger" type="INTEGER"/>
+
+            <column name="MinDecimal" type="DECIMAL(18, 6)"/>
+
+            <column name="MaxDecimal" type="DECIMAL(18, 6)"/>
+
+            <column name="MinLength" type="INTEGER"/>
+
+            <column name="MaxLength" type="INTEGER"/>
+
+            <column name="Expression" type="NVARCHAR(2048)"/>
+
+            <column name="FieldId" type="INTEGER"/>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="FK_FieldValidationRule_FieldId"
+                                 baseTableSchemaName="${schema}" baseTableName="FieldValidationRule"
+                                 baseColumnNames="FieldId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="Field"
+                                 referencedColumnNames="FieldId"/>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_column_field_validation_rule_table" author="${author}">
+        <addColumn schemaName="${schema}" tableName="FieldValidationRule">
+            <column name="Scale" type="INTEGER"/>
+        </addColumn>
+    </changeSet>
+
+
+</databaseChangeLog>

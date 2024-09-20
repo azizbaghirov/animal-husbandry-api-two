@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_add_content_type_to_file_table" author="${author}">
+
+        <addColumn schemaName="${schema}" tableName="FilePathContainer">
+            <column name="ContentType" type="NVARCHAR(1000)"/>
+        </addColumn>
+
+    </changeSet>
+
+    <changeSet id="changelog.delete_attestation_status_from_certification_application" author="${author}}">
+
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication"
+                     columnName="AttestationStatus"/>
+
+    </changeSet>
+
+</databaseChangeLog>

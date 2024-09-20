@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_certification_application" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="CertificationApplication">
+
+            <column name="ApplicationId" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_CertificationApplication_ApplicationId"/>
+            </column>
+
+            <column name="ApplicationCategory" type="NVARCHAR(100)"/>
+
+            <column name="ApplicationNumber" type="NVARCHAR(5)">
+                <constraints nullable="false"
+                             notNullConstraintName="NN_CertificationApplication_ApplicationNumber"
+                             unique="true"
+                             uniqueConstraintName="UK_CertificationApplication_ApplicationNumber"/>
+            </column>
+
+            <column name="FarmerId" type="UUID">
+                <constraints nullable="false" notNullConstraintName="NN_CertificationApplication_FarmerId"/>
+            </column>
+
+            <column name="FarmId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_CertificationApplication_FarmId"/>
+            </column>
+
+            <column name="ApplicationStatus" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_CertificationApplication_ApplicationStatus"/>
+            </column>
+            <column name="InitialMonitoringStatus" type="NVARCHAR(255)">
+                <constraints nullable="false"
+                             notNullConstraintName="NN_CertificationApplication_InitialMonitoringStatus"/>
+            </column>
+
+            <column name="FinalMonitoringStatus" type="NVARCHAR(255)">
+                <constraints nullable="false"
+                             notNullConstraintName="NN_CertificationApplication_FinalMonitoringStatus"/>
+            </column>
+
+            <column name="AnimalSortId" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_CertificationApplication_AnimalSortId"/>
+            </column>
+
+            <column name="VeterinaryContractFilePath" type="NVARCHAR(1000)">
+                <constraints nullable="false" notNullConstraintName="NN_CertificationApplication_FilePath"/>
+            </column>
+
+            <column name="Note" type="NVARCHAR(1000)"/>
+
+            <column name="CreatedBy" type="UUID">
+                <constraints nullable="false" notNullConstraintName="NN_CertificationApplication_CreatedBy"/>
+            </column>
+
+            <column name="CreatedAt" type="DATETIME" defaultValue="GETDATE()">
+                <constraints nullable="false" notNullConstraintName="NN_CertificationApplication_CreatedAt"/>
+            </column>
+
+            <column name="TotalAnimal" type="INTEGER"/>
+
+            <column name="BabyAnimal" type="INTEGER"/>
+
+            <column name="DeadAnimal" type="INTEGER"/>
+
+            <column name="MotherAnimal" type="INTEGER"/>
+
+            <column name="SoldAnimal" type="INTEGER"/>
+
+            <column name="Elite" type="INTEGER"/>
+
+            <column name="EliteRecord" type="INTEGER"/>
+
+            <column name="FertilizedAnimal" type="INTEGER"/>
+
+            <column name="Productivity" type="INTEGER"/>
+
+            <column name="EliteSire" type="INTEGER"/>
+
+            <column name="EliteRecordSire" type="INTEGER"/>
+
+            <column name="ManufacturedMeat" type="INTEGER"/>
+
+            <column name="MilkingAnimal" type="INTEGER"/>
+
+            <column name="MilkPerAnimal" type="INTEGER"/>
+
+            <column name="TotalMilkPerDay" type="INTEGER"/>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="FK_CertificationApplication_FarmerId"
+                                 baseTableSchemaName="${schema}" baseTableName="CertificationApplication"
+                                 baseColumnNames="FarmerId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="FarmerAccount"
+                                 referencedColumnNames="FarmerAccountId"/>
+
+        <addForeignKeyConstraint constraintName="FK_CertificationApplication_FarmId"
+                                 baseTableSchemaName="${schema}" baseTableName="CertificationApplication"
+                                 baseColumnNames="FarmId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="BreedingAnimalFarm"
+                                 referencedColumnNames="FarmId"/>
+
+        <addForeignKeyConstraint constraintName="FK_CertificationApplication_AnimalSortId"
+                                 baseTableSchemaName="${schema}" baseTableName="CertificationApplication"
+                                 baseColumnNames="AnimalSortId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="AnimalSort"
+                                 referencedColumnNames="AnimalSortId"/>
+
+        <addForeignKeyConstraint constraintName="FK_CertificationApplication_CreatedBy"
+                                 baseTableSchemaName="${schema}" baseTableName="CertificationApplication"
+                                 baseColumnNames="CreatedBy"
+                                 referencedTableSchemaName="${schema}" referencedTableName="PhysicalPerson"
+                                 referencedColumnNames="PhysicalPersonId"/>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_sequence_certification_application_number" author="${author}">
+        <createSequence sequenceName="SEQ_CertificationApplication_ApplicationNumber"
+                        schemaName="${schema}"
+                        incrementBy="1"
+                        startValue="1000"/>
+    </changeSet>
+
+</databaseChangeLog>

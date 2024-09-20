@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_add_animal_type_column_to_field_configuration_table" author="${author}">
+
+        <addColumn schemaName="${schema}" tableName="FieldConfiguration">
+            <column name="AnimalTypeId" type="INTEGER"/>
+        </addColumn>
+
+        <addForeignKeyConstraint constraintName="FK_FieldConfiguration_AnimalTypeId"
+                                 baseTableSchemaName="${schema}" baseTableName="FieldConfiguration"
+                                 baseColumnNames="AnimalTypeId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="AnimalType"
+                                 referencedColumnNames="AnimalTypeId"/>
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_delete_data_from_field_table" author="${author}">
+
+        <sql>
+            DELETE dd
+            FROM AnimalHusbandry.DiscoveredData AS dd
+            JOIN AnimalHusbandry.FieldValue AS fv
+                ON fv.FieldValueId = dd.DeclaredFieldValueId OR fv.FieldValueId = dd.DiscoveredFieldValueId
+            JOIN AnimalHusbandry.Field AS f ON f.FieldId = fv.FieldId
+            WHERE f.DataType='ANIMAL_SORT' OR f.DataType='ANIMAL_TYPE';
+
+            DELETE fv
+            FROM AnimalHusbandry.FieldValue fv
+            JOIN AnimalHusbandry.Field f ON f.FieldId = fv.FieldId
+            WHERE f.DataType='ANIMAL_SORT' OR f.DataType='ANIMAL_TYPE';
+
+            DELETE f
+            FROM AnimalHusbandry.Field f
+            WHERE f.DataType='ANIMAL_SORT' OR f.DataType='ANIMAL_TYPE';
+        </sql>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_modify_unique_constraint_field_configuration_table" author="${author}">
+
+        <dropUniqueConstraint schemaName="${schema}" tableName="FieldConfiguration"
+                              constraintName="UK_FieldConfiguration_FarmTypeId_FarmSpecializationId"/>
+
+        <addUniqueConstraint schemaName="${schema}" tableName="FieldConfiguration"
+                             columnNames="FarmTypeId,FarmSpecializationId,AnimalTypeId"
+                             constraintName="UK_FieldConfiguration_FarmTypeId_FarmSpecializationId_AnimalTypeId"/>
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_order_column_to_field_table" author="${author}">
+
+        <addColumn schemaName="${schema}" tableName="Field">
+            <column name="FieldOrder" type="INTEGER"/>
+        </addColumn>
+
+    </changeSet>
+
+</databaseChangeLog>

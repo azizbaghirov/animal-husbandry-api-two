@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_document_type_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="DocumentType">
+
+            <column name="DocumentTypeId" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_DocumentType_DocumentTypeId"/>
+            </column>
+
+            <column name="Name" type="NVARCHAR(255)"/>
+
+        </createTable>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_create_file_path_container_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="FilePathContainer">
+
+            <column name="FileId" type="UUID">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_FilePathContainer_FileId"/>
+            </column>
+
+            <column name="Path" type="NVARCHAR(300)">
+                <constraints nullable="false" notNullConstraintName="NN_FilePathContainer_Path"/>
+            </column>
+
+            <column name="DocumentTypeId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_FilePathContainer_DocumentTypeId"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="FK_File_DocumentTypeId"
+                                 baseTableSchemaName="${schema}" baseTableName="FilePathContainer"
+                                 baseColumnNames="DocumentTypeId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="DocumentType"
+                                 referencedColumnNames="DocumentTypeId"/>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_initial_monitoring_decision_file_path_container" author="${author}">
+        <createTable schemaName="${schema}" tableName="InitialMonitoringDecisionFilePathContainer">
+
+            <column name="InitialMonitoringDecisionId" type="INTEGER">
+                <constraints nullable="false"
+                             notNullConstraintName="NN_InitialMonitoringDecisionFilePathContainer_InitialMonitoringDecisionId"/>
+            </column>
+
+            <column name="FileId" type="UUID">
+                <constraints nullable="false" notNullConstraintName="NN_InitialMonitoringDecisionFilePathContainer_FileId"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="FK_InitialMonitoringDecisionFilePathContainer_InitialMonitoringDecisionId"
+                                 baseTableSchemaName="${schema}" baseTableName="InitialMonitoringDecisionFilePathContainer"
+                                 baseColumnNames="InitialMonitoringDecisionId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="InitialMonitoringDecision"
+                                 referencedColumnNames="InitialMonitoringDecisionId"/>
+
+        <addForeignKeyConstraint constraintName="FK_InitialMonitoringDecisionFilePathContainer_FileId"
+                                 baseTableSchemaName="${schema}" baseTableName="InitialMonitoringDecisionFilePathContainer"
+                                 baseColumnNames="FileId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="FilePathContainer"
+                                 referencedColumnNames="FileId"/>
+
+    </changeSet>
+
+
+</databaseChangeLog>

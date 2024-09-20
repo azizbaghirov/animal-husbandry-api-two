@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_field_configuration_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="FieldConfiguration">
+
+            <column name="FieldConfigurationId" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_FieldConfiguration_FieldConfigurationId"/>
+            </column>
+
+            <column name="FarmTypeId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_FieldConfiguration_FieldConfigurationId"/>
+            </column>
+
+            <column name="FarmSpecializationId" type="INTEGER"/>
+
+        </createTable>
+
+        <addUniqueConstraint schemaName="${schema}" tableName="FieldConfiguration"
+                             columnNames="FarmTypeId,FarmSpecializationId"
+                             constraintName="UK_FieldConfiguration_FarmTypeId_FarmSpecializationId"/>
+
+        <addForeignKeyConstraint constraintName="FK_FieldConfiguration_FarmTypeId"
+                                 baseTableSchemaName="${schema}" baseTableName="FieldConfiguration"
+                                 baseColumnNames="FarmTypeId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="BreedingAnimalFarmType"
+                                 referencedColumnNames="FarmTypeId"/>
+
+        <addForeignKeyConstraint constraintName="FK_FieldConfiguration_FarmSpecializationId"
+                                 baseTableSchemaName="${schema}" baseTableName="FieldConfiguration"
+                                 baseColumnNames="FarmSpecializationId"
+                                 referencedTableSchemaName="${schema}"
+                                 referencedTableName="BreedingAnimalFarmSpecialization"
+                                 referencedColumnNames="FarmSpecializationId"/>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_field_configuration_add_name" author="${author}">
+        <addColumn schemaName="${schema}" tableName="FieldConfiguration">
+            <column name="Name" type="NVARCHAR(1000)">
+                <constraints nullable="false" notNullConstraintName="NN_FieldConfiguration_Name"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

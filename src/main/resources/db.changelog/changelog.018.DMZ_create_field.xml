@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_field_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="Field">
+
+            <column name="FieldId" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_Field_FieldId"/>
+            </column>
+
+            <column name="DataType" type="NVARCHAR(255)"/>
+
+            <column name="Label" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_Field_Label"/>
+            </column>
+
+            <column name="Name" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_Field_Name"/>
+            </column>
+
+            <column name="Description" type="NVARCHAR(255)"/>
+
+            <column name="MeasurementUnitId" type="INTEGER"/>
+
+            <column name="FieldConfigurationId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_Field_FieldConfigurationId"/>
+            </column>
+
+            <column name="FieldType" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_Field_FieldType"/>
+            </column>
+
+            <column name="Mandatory" type="BIT" defaultValue="0">
+                <constraints nullable="false" notNullConstraintName="NN_Field_Mandatory"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="FK_Field_FieldConfigurationId"
+                                 baseTableSchemaName="${schema}" baseTableName="Field"
+                                 baseColumnNames="FieldConfigurationId"
+                                 referencedTableSchemaName="${schema}"
+                                 referencedTableName="FieldConfiguration"
+                                 referencedColumnNames="FieldConfigurationId"/>
+
+        <addForeignKeyConstraint constraintName="FK_Field_MeasurementUnitId"
+                                 baseTableSchemaName="${schema}" baseTableName="Field"
+                                 baseColumnNames="MeasurementUnitId"
+                                 referencedTableSchemaName="${schema}"
+                                 referencedTableName="MeasurementUnit"
+                                 referencedColumnNames="MeasurementUnitId"/>
+
+    </changeSet>
+
+</databaseChangeLog>

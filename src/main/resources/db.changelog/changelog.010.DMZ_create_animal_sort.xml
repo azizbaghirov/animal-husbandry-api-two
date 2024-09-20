@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_animal_sort" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="AnimalSort">
+
+            <column name="AnimalSortId" type="NVARCHAR(255)">
+                <constraints primaryKey="true" primaryKeyName="PK_AnimalSort_AnimalSortId"/>
+            </column>
+
+            <column name="Name" type="NVARCHAR(255)" >
+                <constraints nullable="false" notNullConstraintName="NN_AnimalSort_Name"/>
+            </column>
+
+            <column name="AnimalTypeId" type="INTEGER" >
+                <constraints nullable="false" notNullConstraintName="NN_AnimalSort_AnimalTypeId"/>
+            </column>
+
+            <column name="Active" type="BIT" >
+                <constraints nullable="false" notNullConstraintName="NN_AnimalSort_Active"/>
+            </column>
+
+        </createTable>
+
+        <addUniqueConstraint schemaName="${schema}" tableName="AnimalSort" columnNames="Name,AnimalTypeId"
+
+        constraintName="UK_AnimalSort_Name_AnimalTypeId" />
+
+        <addForeignKeyConstraint constraintName="FK_AnimalSort_AnimalTypeId"
+                                 baseTableSchemaName="${schema}" baseTableName="AnimalSort"
+                                 baseColumnNames="AnimalTypeId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="AnimalType"
+                                 referencedColumnNames="AnimalTypeId"/>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_cow_sort" author="${author}">
+        <sql>
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('57465428-FCD8-4DB3-A6BE-77DC92FAD21F', N'Zebu - Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('86391B40-0CFB-4434-9061-61CEAB3842DD', N'Zebu - Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('CE55487E-BF74-427C-A78B-0A4CE8FD81A6', N'Zebu - Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('0DE3C63A-49E0-4CCB-86FD-13F8074DC863', N'Zebu - Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('8CAEA846-9A0A-440F-B720-3EF7DDA6B8C0', N'Zebu', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('00A04132-D693-4EF7-8D37-8E2437E51D6E', N'Təyin edilməyib', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('3F091FF8-4C36-444C-BB2D-DAA1E4B700D9', N'Şvis- Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('22A4D69F-072E-4AEE-A2D3-36B9D9C6120D', N'Şvis- Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('C975D9FC-9D20-489E-ABF6-C0992006BEF4', N'Şvis- Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('68897035-3A41-4406-B60A-0A5F9B622EFF', N'Şvis- Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('0A1A7DB7-5875-4D15-8AB4-2DDD1311E162', N'Şvis', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('E9BD0E96-B492-4BBB-9ABF-E7BE10624048', N'Şarole- Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('E03346F2-F9A3-4381-88EE-65E6E6CD23C9', N'Şarole- Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('CB512BAB-61BA-4B12-8141-A743C16CBB4C', N'Şarole- Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('51D480FF-5C41-4384-B095-5510FBF4A737', N'Şarole- Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('631F26BA-8636-4D18-98BE-53A7541D00A1', N'Şarole', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('1C8620B8-B53E-4BC2-A8A9-3FDBA23E25D2', N'Simmental - Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('5C7C2583-70F6-4107-8632-0E262F075C51', N'Simmental - Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('EBB7B245-B4D1-4F98-BC9E-6C30F05329FD', N'Simmental - Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('1A50A01A-FD01-4865-85BF-10E463020023', N'Simmental - Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('9187DB4F-11C7-48A5-9092-61CC60373170', N'Simmental', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('C3EC3B37-FECA-4CDC-886A-0E80C8A89215', N'Limuzin- Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('8596C65A-7AEE-4AC8-9489-C74F5125D374', N'Limuzin- Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('6DD5DA07-5718-493C-A57A-AC4DBE4D9C27', N'Limuzin- Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('2A3F5263-3592-44D9-8184-CEB8D2A90D7C', N'Limuzin- Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('50570A94-02CA-4F19-B33E-63B411023F31', N'Limuzin', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('53B6BB99-C192-4A2B-B931-694C567AC374', N'Lebedin - Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('EA40B12C-97D5-4C9E-BB5B-8F6DADBAFBD5', N'Lebedin - Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('038C347B-6D39-409A-AFD1-37E5FD7CFEDB', N'Lebedin - Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('DE4CB20E-9CBC-4713-82D2-14B48872F563', N'Lebedin - Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('A931C491-4F83-4A6B-BAC8-EB0FE94C5A05', N'Lebedin', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('C5637C3C-6D19-4666-B74E-45E8AF98F4B3', N'Qonur Latviya- Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('D00FE17F-D5FC-421C-B209-1E61396D64B0', N'Qonur Latviya- Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('5BC3AD18-4ABB-4E8A-B301-513810216D94', N'Qonur Latviya- Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('B559354F-7167-447D-838B-C0E680BF5102', N'Qonur Latviya- Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('8B164C34-9E43-4726-AD01-76A558D9ABFA', N'Qonur Latviya', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('EFB0D799-FCFB-4B88-BE8C-7E5C364C457A', N'Qonur Karpat - Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('EAE21886-8E86-4D8B-B536-DCF20BE84E9E', N'Qonur Karpat - Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('BE0ADEF7-4A00-4833-B437-1838989422AD', N'Qonur Karpat - Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('5499DD94-708E-49CD-A257-3DE54FD1F726', N'Qonur Karpat - Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('81A68AD9-F8DE-4371-95A4-4D99A7E3C69D', N'Qonur Karpat', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('0DADDB2C-97FE-4740-8014-61C8B6C29D85', N'Qırmızı-ala- Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('152CCA3F-EE6D-4A2B-9AFF-36A5CA2977BB', N'Qırmızı-ala- Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('01C31597-2410-4B41-90BD-EAE5929C774C', N'Qırmızı-ala- Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('A31D4C74-4324-434D-AE0B-1854C533BD23', N'Qırmızı-ala- Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('1BC1E5E5-8F86-41EB-9F47-4E2677029452', N'Qırmızı-ala', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('39361CC9-C052-47B0-822A-CC7BDF107376', N'Qırmızı Səhra- Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('9AE02AC9-D3F4-4CA3-95FC-5FEF2A492438', N'Qırmızı Səhra- Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('7BBD3884-9D02-4F6F-A689-A65F384E819C', N'Qırmızı Səhra- Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('52BC738F-486E-4151-AE74-88EA932BDC9E', N'Qırmızı Səhra- Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('009DA188-CD6E-4C4A-B69A-72E02170633F', N'Qırmızı Səhra', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('035EF8CE-F861-4837-845F-2B13B510B717', N'Qırmızı Norveç- Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('091930A8-8277-43A6-9C10-EA6B7785178B', N'Qırmızı Norveç- Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('FF808FB5-F3D0-4C74-B403-AF940A4A121D', N'Qırmızı Norveç- Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('15B1EC4A-7EC0-4534-AD2C-6FF8CDFC73DE', N'Qırmızı Norveç- Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('92C34A10-3DC6-495C-B588-D6A14056F40F', N'Qırmızı Norveç', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('E71244E2-B8B4-4B16-A7B2-66259801B0D1', N'Qırmızı Eston - Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('6BBB0C4D-084A-4304-B2FA-A9A23D9EE8CE', N'Qırmızı Eston - Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('2924F472-D06E-447D-8459-AAEC1B55A15D', N'Qırmızı Eston - Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('1F387FD8-3D8E-4CBF-B94F-8B9914A7A172', N'Qırmızı Eston - Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('68D4DFC9-92C9-46B9-9678-AD0AA9751DF6', N'Qırmızı Eston', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('CAB9CF8C-B241-4380-955F-5ACEF35FECBF', N'Qara-ala- Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('A9BF92A6-37BA-4365-97AB-85387BF0D8AF', N'Qara-ala- Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('FD43D4DF-3B6C-4B7F-A1DF-D131DCD42580', N'Qara-ala- Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('6EF629D5-D3AB-42EB-B91A-615C7C93E2FA', N'Qara-ala- Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('3AD4BC78-BBE1-44A9-8C7A-8EC0B64500C5', N'Qara-ala', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('2FE04373-D7C8-4191-AE13-868333AA4DF7', N'Kastroma - Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('1F6C2490-13A3-4867-B44C-550BE9653D51', N'Kastroma - Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('6BE409A1-C2BF-4225-B4C7-131C4CCCE654', N'Kastroma - Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('64C44643-AC5C-4C0A-8D19-A7F5612939AC', N'Kastroma - Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('E7709909-0C14-42F4-8F33-E5109FE4682F', N'Kastroma', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('4EF0B0EA-95CD-4721-8827-ED9A95022B79', N'Jersey', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('8CC915CB-1B9D-439F-8BF8-4EB2A4E0A7E4', N'Holştin-friz- Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('F5538961-9392-48F3-B0F7-E9B2CDF4F102', N'Holştin-friz- Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('7E4C22E4-AE05-40EE-95D6-44524700EBFF', N'Holştin-friz- Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('6036E779-FF23-468A-BB70-DAEEF4311378', N'Holştin-friz- Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('84D32583-EF9F-41F5-879E-169905A81B2A', N'Holştin-friz', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('FECEA0AE-1E15-4A8A-9939-F47A557AC63F', N'Hollavey- Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('0454D528-B406-4582-8CD4-D2A57A35DD5A', N'Hollavey- Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('C8FC168D-5C85-4A3B-AAA0-4C39055ECF8B', N'Hollavey- Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('7DD25857-BE4C-42A1-95D2-2F4621E83EC5', N'Hollavey- Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('BE0B9CAE-93F3-4532-A73D-B477C245DBC6', N'Hollavey', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('76874396-E49C-49DF-96B7-1342514D155B', N'Hereford- Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('33041423-F25E-4809-B4B5-57DADD5816F0', N'Hereford- Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('3E14C08B-4814-4EFE-9A0F-7F17F5A01F59', N'Hereford- Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('648738C2-E282-4549-BE54-4D221CDC2650', N'Hereford- Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('32529BCE-963D-4ED4-A245-7FD6A7BF1854', N'Hereford', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('B1D7895F-499E-4DE7-865E-0ADA956B3671', N'Cersey- Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('2F019F7B-DDD5-49AC-9742-76E45942B888', N'Cersey- Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('99E0A2F3-25D5-4CF0-A481-2A4F395EA1E0', N'Cersey- Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('86AEEE95-65B4-41B7-AED4-5C64DD6ABDA4', N'Cersey- Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('A21EA8B2-6399-47CE-B707-F335C9EF7EDC', N'Cersey', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('2218E610-2794-4273-805F-2035C8D6FFC7', N'Ayrşir', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('ED93D25E-1263-47EE-A417-DB39253ADD1A', N'Anqler- Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('83409960-04D8-4BB4-AA57-114209359CDD', N'Anqler- Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('64CA0C25-AB1D-4C16-9D83-48834B24FDC5', N'Anqler- Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('8C9A325E-B5DC-4578-BCD1-82A8292BA1FB', N'Anqler- Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('515146A0-56FF-466C-B86F-E440E21C3EC6', N'Anqler', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('907A67AB-23AD-4747-94C3-BE728A5D3C31', N'Angler', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('873217DE-032D-45E2-A071-648833602A0A', N'Ağbaş Qazax- Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('28B64F88-726A-4487-AC90-8F4A3626B822', N'Ağbaş Qazax- Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('89BC4707-F679-4F5F-853D-E8E9BEAC478A', N'Ağbaş Qazax- Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('65780B6C-CA19-4D11-AA77-DF3FED3B0A06', N'Ağbaş Qazax- Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('F8CF354D-5D8E-4A64-A023-9A3CB8E13F37', N'Ağbaş Qazax', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('D17C06A6-DA67-4D49-90E9-F28F7570B94C', N'Aberdin-anqus- Təmiz cins', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('C3B50485-1C02-4D38-9ED9-8BBB04F76BBE', N'Aberdin-anqus- Mələz 3', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('8BAB6027-8D84-4636-8406-A618446FCF4D', N'Aberdin-anqus- Mələz 2', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('E79D488E-1BD4-42D4-9345-4F30EC7402BF', N'Aberdin-anqus- Mələz 1', 1, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('41CE84E6-FED5-425F-9932-3D0EB883B6DF', N'Aberdin-anqus', 1, 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_buffalo_sort" author="${author}">
+        <sql>
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('BAD5E67D-D682-48B4-9DD0-49CB553F2323', N'Təyin edilməyib', 2, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('DFD805CE-7444-4095-A123-5E0F54FBC286', N'Murrah', 2, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('01685547-1D5B-4960-83C1-B3DDF3785C67', N'Yerli çamış cinsləri', 2, 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_sheep_sort" author="${author}">
+        <sql>
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('06C24FFA-7450-467C-8805-08F4CEB4642B', N'Ləzgi', 3, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('19880DA5-EFEC-43A2-896F-1197B05FCA56', N'Morkaraman', 3, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('847EE030-1C77-4898-9F64-1CD90D42F54F', N'Cəro', 3, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('EBBDAB4B-DB94-43C5-8B3F-3328864E57C2', N'Şirvan', 3, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('07AC866C-E794-461D-ADEE-3FE5EF86E1D1', N'Balbas', 3, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('9B46B95F-991C-44BE-81ED-528A3E3A1ED6', N'Mazıx', 3, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('34B4E6D4-86C5-4EBE-8679-9023D3775EBB', N'Herik', 3, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('3EE688EC-D934-41A3-81AB-9BB735347186', N'Dağ Merinosu', 3, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('61091870-83EB-41A8-814B-9CCADDA21F88', N'Qaradolaq', 3, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('AAA13EF3-5E33-44C7-BA61-A8C61FC92A0F', N'Qarabağ ', 3, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('9965DA9D-6FFE-4421-BB3F-B4663A19AA38', N'Bozax', 3, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('B123D455-B304-4E50-B3D3-D0803E0D4507', N'Qala', 3, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('2BDBA4EB-F5E6-4382-B092-EB39029B02B9', N'Abşeron qoyunu', 3, 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_goat_sort" author="${author}">
+        <sql>
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('0912AE94-8745-4C56-8968-7E4D9D268BE9', N'Alpin', 4, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('91CEB264-771B-4A4B-9135-E25B778101B9', N'Hələb', 4, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('5AAAE67F-2CBF-4322-9260-E8CF4DE28B9C', N'Saanen', 4, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('CC5E8A68-7C1E-4E35-BEEB-CA758A75E401', N'Yerli keçi cinsləri', 4, 1);
+        </sql>
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_camel_sort" author="${author}">
+        <sql>
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('97D1B1B5-1E45-40CC-8D24-2040295F7966', N'Hücrəsiz', 9, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('7881FD9A-04C8-43CF-BCEC-4DB738F795DF', N'Birhücrəli', 9, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('BFDA2100-1102-460C-AF2B-73835E6E3469', N'Dəvə', 9, 1);
+            INSERT INTO AnimalHusbandry.AnimalSort(AnimalSortId, Name, AnimalTypeId, Active) values ('26FB3F42-8CC5-4768-AB19-BA461030CC8D', N'İkihücrəli', 9, 1);
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>

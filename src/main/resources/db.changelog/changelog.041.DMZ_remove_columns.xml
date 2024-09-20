@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_delete_column_from_field_validation_rule_table" author="${author}">
+
+        <dropColumn schemaName="${schema}" tableName="FieldValidationRule" columnName="ValidationRule"/>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_delete_column_from_certification_application_table" author="${author}">
+
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="ApplicationCategory"/>
+
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="TotalAnimal"/>
+
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="BabyAnimal"/>
+
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="DeadAnimal"/>
+
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="MotherAnimal"/>
+
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="SoldAnimal"/>
+
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="Elite"/>
+
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="EliteRecord"/>
+
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="FertilizedAnimal"/>
+
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="Productivity"/>
+
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="EliteSire"/>
+
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="EliteRecordSire"/>
+
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="ManufacturedMeat"/>
+
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="MilkingAnimal"/>
+
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="MilkPerAnimal"/>
+
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="TotalMilkPerDay"/>
+
+    </changeSet>
+
+</databaseChangeLog>

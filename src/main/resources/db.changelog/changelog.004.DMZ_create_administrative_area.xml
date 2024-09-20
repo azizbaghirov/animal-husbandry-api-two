@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_administrative_area" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="AdministrativeArea">
+
+            <column name="AdministrativeAreaId" type="INTEGER">
+                <constraints primaryKey="true" primaryKeyName="PK_AdministrativeArea_AdministrativeAreaId"/>
+            </column>
+
+            <column name="Name" type="NVARCHAR(255)" />
+
+            <column name="Code" type="NVARCHAR(255)">
+                <constraints unique="true" uniqueConstraintName="UK_AdministrativeArea_Code" />
+            </column>
+
+            <column name="RegionId" type="INTEGER"/>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="FK_AdministrativeArea_RegionId"
+                                 baseTableSchemaName="${schema}" baseTableName="AdministrativeArea"
+                                 baseColumnNames="RegionId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="Region"
+                                 referencedColumnNames="RegionId"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_add_columns_to_field_document" author="${author}">
+
+        <addColumn schemaName="${schema}" tableName="FieldDocument">
+            <column name="ReferencedJournalNumber" type="NVARCHAR(255)"/>
+        </addColumn>
+
+        <addColumn schemaName="${schema}" tableName="FieldDocument">
+            <column name="ReferencedRegionCode" type="NVARCHAR(255)"/>
+        </addColumn>
+
+        <addColumn schemaName="${schema}" tableName="FieldDocument">
+            <column name="ReferencedRegistrationNumber" type="NVARCHAR(255)"/>
+        </addColumn>
+
+        <addColumn schemaName="${schema}" tableName="FieldDocument">
+            <column name="ReferencedRegistryNumber" type="NVARCHAR(255)"/>
+        </addColumn>
+
+    </changeSet>
+
+</databaseChangeLog>

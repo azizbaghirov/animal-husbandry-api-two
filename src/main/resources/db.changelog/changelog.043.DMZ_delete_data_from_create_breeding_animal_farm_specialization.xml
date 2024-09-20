@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_delete_value_wool_farm_from_breeding_animal_farm_specialization_table"
+               author="${author}">
+
+        <sql>
+            DELETE
+            FROM AnimalHusbandry.BreedingAnimalFarmSpecialization
+            WHERE FarmSpecializationId = 4;
+        </sql>
+
+    </changeSet>
+
+</databaseChangeLog>

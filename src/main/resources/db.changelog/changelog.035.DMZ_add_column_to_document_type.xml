@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_data_to_document_type" author="${author}">
+
+        <sql>
+            UPDATE AnimalHusbandry.DocumentType
+            SET Label = 'CERTIFICATE'
+            WHERE Label = 'Certificate';
+
+            INSERT INTO AnimalHusbandry.DocumentType(Name, Label, ReadOnly)
+            values (N'Akt', 'ACT', 1);
+            INSERT INTO AnimalHusbandry.DocumentType(Name, Label, ReadOnly)
+            values (N'Protokol', 'PROTOCOL', 1);
+            INSERT INTO AnimalHusbandry.DocumentType(Name, Label, ReadOnly)
+            values (N'Reyestrdən çıxarış', 'REGISTRY_EXCERPT', 1);
+        </sql>
+
+    </changeSet>
+
+
+</databaseChangeLog>

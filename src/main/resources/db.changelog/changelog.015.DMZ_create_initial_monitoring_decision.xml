@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_initial_monitoring_decision_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="InitialMonitoringDecision">
+
+            <column name="InitialMonitoringDecisionId" type="INTEGER" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="PK_InitialMonitoringDecision_InitialMonitoringDecisionId"/>
+            </column>
+
+            <column name="ApplicationId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_InitialMonitoringDecision_ApplicationId"/>
+            </column>
+
+            <column name="Compliant" type="BIT">
+                <constraints nullable="false" notNullConstraintName="NN_InitialMonitoringDecision_Compliant"/>
+            </column>
+
+            <column name="Justification" type="NVARCHAR(1000)"/>
+
+            <column name="CreatedBy" type="UUID">
+                <constraints nullable="false" notNullConstraintName="NN_InitialMonitoringDecision_CreatedBy"/>
+            </column>
+
+            <column name="CreatedAt" type="DATETIME" defaultValue="GETDATE()">
+                <constraints nullable="false" notNullConstraintName="NN_InitialMonitoringDecision_CreatedAt"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="FK_InitialMonitoringDecision_Operator_CreatedBy"
+                                 baseTableSchemaName="${schema}" baseTableName="InitialMonitoringDecision"
+                                 baseColumnNames="CreatedBy"
+                                 referencedTableSchemaName="${schema}" referencedTableName="Operator"
+                                 referencedColumnNames="OperatorId"/>
+
+        <addForeignKeyConstraint constraintName="FK_InitialMonitoringDecision_CertificationApplication_ApplicationId"
+                                 baseTableSchemaName="${schema}" baseTableName="InitialMonitoringDecision"
+                                 baseColumnNames="ApplicationId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="CertificationApplication"
+                                 referencedColumnNames="ApplicationId"/>
+
+    </changeSet>
+
+</databaseChangeLog>

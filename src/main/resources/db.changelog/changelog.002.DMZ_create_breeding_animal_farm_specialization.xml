@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_breeding_animal_farm_specialization" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="BreedingAnimalFarmSpecialization">
+
+            <column name="FarmSpecializationId" type="INTEGER">
+                <constraints primaryKey="true"
+                             primaryKeyName="PK_BreedingAnimalFarmSpecialization_FarmSpecializationId"/>
+            </column>
+
+            <column name="Name" type="NVARCHAR(255)">
+                <constraints nullable="false" notNullConstraintName="NN_BreedingAnimalFarmSpecialization_Name"/>
+            </column>
+
+            <column name="Label" type="NVARCHAR(255)"/>
+
+            <column name="FarmTypeId" type="INTEGER"/>
+
+        </createTable>
+
+        <addUniqueConstraint schemaName="${schema}" tableName="BreedingAnimalFarmSpecialization"
+                             columnNames="Name,FarmTypeId"
+                             constraintName="UK_BreedingAnimalFarmSpecialization_Name_FarmTypeId"/>
+
+        <addForeignKeyConstraint constraintName="FK_BreedingAnimalFarmSpecialization_FarmTypeId"
+                                 baseTableSchemaName="${schema}" baseTableName="BreedingAnimalFarmSpecialization"
+                                 baseColumnNames="FarmTypeId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="BreedingAnimalFarmType"
+                                 referencedColumnNames="FarmTypeId"/>
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_breeding_animal_farm_specialization" author="${author}">
+        <sql>
+            INSERT INTO AnimalHusbandry.BreedingAnimalFarmSpecialization (FarmSpecializationId, Name, Label, FarmTypeId)
+            VALUES (1, N'Ətlik','MEAT_FARM', 1);
+            INSERT INTO AnimalHusbandry.BreedingAnimalFarmSpecialization (FarmSpecializationId, Name, Label, FarmTypeId)
+            VALUES (2, N'Südlük','DAIRY_FARM', 1);
+            INSERT INTO AnimalHusbandry.BreedingAnimalFarmSpecialization (FarmSpecializationId, Name, Label, FarmTypeId)
+            VALUES (3, N'Ətlik','MEAT_FARM', 4);
+            INSERT INTO AnimalHusbandry.BreedingAnimalFarmSpecialization (FarmSpecializationId, Name, Label, FarmTypeId)
+            VALUES (4, N'Yunluq','WOOL_FARM', 4);
+            INSERT INTO AnimalHusbandry.BreedingAnimalFarmSpecialization (FarmSpecializationId, Name, Label, FarmTypeId)
+            VALUES (5, N'Ətlik','MEAT_FARM', 7);
+            INSERT INTO AnimalHusbandry.BreedingAnimalFarmSpecialization (FarmSpecializationId, Name, Label, FarmTypeId)
+            VALUES (6, N'Yumurtalıq','EGG_FARM', 7);
+            INSERT INTO AnimalHusbandry.BreedingAnimalFarmSpecialization (FarmSpecializationId, Name, Label, FarmTypeId)
+            VALUES (7, N'Ətlik-Yumurtalıq','MEAT_EGG_FARM', 7);
+            INSERT INTO AnimalHusbandry.BreedingAnimalFarmSpecialization (FarmSpecializationId, Name, Label, FarmTypeId)
+            VALUES (8, N'Ətlik-Südlük','MEAT_DAIRY_FARM', 1);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

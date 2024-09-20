@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <include file="db.changelog/changelog.DMZ-props.xml"/>
+    <include file="db.changelog/changelog.001.DMZ_create_breeding_animal_farm_type.xml"/>
+    <include file="db.changelog/changelog.002.DMZ_create_breeding_animal_farm_specialization.xml"/>
+    <include file="db.changelog/changelog.003.DMZ_create_region.xml"/>
+    <include file="db.changelog/changelog.004.DMZ_create_administrative_area.xml"/>
+    <include file="db.changelog/changelog.005.DMZ_create_legal_and_phyisical_person.xml"/>
+    <include file="db.changelog/changelog.006.DMZ_create_breeding_animal_farm.xml"/>
+    <include file="db.changelog/changelog.007.DMZ_create_field_document.xml"/>
+    <include file="db.changelog/changelog.008.DMZ_create_farm_AUD.xml"/>
+    <include file="db.changelog/changelog.009.DMZ_create_animal_type.xml"/>
+    <include file="db.changelog/changelog.010.DMZ_create_animal_sort.xml"/>
+    <include file="db.changelog/changelog.011.DMZ-23_create_certification_application.xml"/>
+    <include file="db.changelog/changelog.012.DMZ_create_asset_and_asset_input_configuration.xml"/>
+    <include file="db.changelog/changelog.013.DMZ-16_create_operator_table.xml"/>
+    <include file="db.changelog/changelog.020.DMZ-57_final_monitoring_judgement_summary_view.xml"/>
+    <include file="db.changelog/changelog.021.DMZ-70_certification.xml"/>
+    <include file="db.changelog/changelog.014.DMZ_create_vaccination.xml"/>
+    <include file="db.changelog/changelog.015.DMZ_create_initial_monitoring_decision.xml"/>
+    <include file="db.changelog/changelog.016.DMZ_create_measurement_unit.xml"/>
+    <include file="db.changelog/changelog.017.DMZ_create_field_configuration.xml"/>
+    <include file="db.changelog/changelog.018.DMZ_create_field.xml"/>
+    <include file="db.changelog/changelog.019.DMZ_create_certification_application_data_and_field_value.xml"/>
+    <include file="db.changelog/changelog.020.DMZ_create_initial_monitoring_data_and_discovered_data.xml"/>
+    <include file="db.changelog/changelog.021.DMZ_drop_not_null_field_table.xml"/>
+    <include file="db.changelog/changelog.022.DMZ_add_constraints_and_foreign_key.xml"/>
+    <include file="db.changelog/changelog.023.DMZ_add_column_and_foreign_key_certification_application.xml"/>
+    <include file="db.changelog/changelog.024.DMZ_drop_constraint_from_field_value.xml"/>
+    <include file="db.changelog/changelog.025.DMZ_create_table.xml"/>
+    <include file="db.changelog/changelog.026.DMZ_add_column_to_certification_application.xml"/>
+    <include file="db.changelog/changelog.027.DMZ-52_create_final_monitoring_decision.xml"/>
+    <include file="db.changelog/changelog.028.DMZ_change_constraints.xml"/>
+    <include file="db.changelog/changelog.029.DMZ_add_column_to_document_type.xml"/>
+    <include file="db.changelog/changelog.030.DMZ-75_add_column_initial_monitoring_decision.xml"/>
+    <include file="db.changelog/changelog.031.DMZ_add_column_to_file.xml"/>
+    <include file="db.changelog/changelog.032.DMZ-73_add_column_to_breeding_animal_farm_certificate.xml"/>
+    <include file="db.changelog/changelog.033.DMZ-hotfix_add_column_to_vaccination.xml"/>
+    <include file="db.changelog/changelog.034.DMZ_remove_vaccination_unique_key.xml"/>
+    <include file="db.changelog/changelog.035.DMZ_add_column_to_document_type.xml"/>
+    <include file="db.changelog/changelog.036.DMZ_delete_animal_sort_data.xml"/>
+    <include file="db.changelog/changelog.037.DMZ-39_add_column_to_certification_application.xml"/>
+    <include file="db.changelog/changelog.038.DMZ-132_add_column_to_breeding_animal_farm.xml"/>
+    <include file="db.changelog/changelog.039.DMZ-135_add_column_to_field_configuration.xml"/>
+    <include file="db.changelog/changelog.040.DMZ_validation_rule.xml"/>
+    <include file="db.changelog/changelog.041.DMZ_remove_columns.xml"/>
+    <include file="db.changelog/changelog.042.DMZ_remove_field_value_columns.xml"/>
+    <include file="db.changelog/changelog.043.DMZ_delete_data_from_create_breeding_animal_farm_specialization.xml"/>
+    <include file="db.changelog/changelog.044.DMZ-139_animal_list_from_bxm.xml"/>
+    <include file="db.changelog/changelog.045.DMZ_set_animals.xml"/>
+    <include file="db.changelog/changelog.046.DMZ-update_measurement_unit.xml"/>
+    <include file="db.changelog/changelog.047.DMZ_create_final_judjement_and_final_decision_AUD.xml"/>
+    <include file="db.changelog/changelog.048.DMZ-158_delete_breeding_animal_farm.xml"/>
+    <include file="db.changelog/changelog.049.DMZ_drop_foreign_key_constraint_from_revinfo.xml"/>
+    <include file="db.changelog/changelog.050.DMZ-161_change_registry_act.xml"/>
+    <include file="db.changelog/changelog.051.DMZ_change_unique_breeding_animal_farm.xml"/>
+    <include file="db.changelog/changelog.052.DMZ-165_add_document_type.xml"/>
+    <include file="db.changelog/changelog.053.DMZ_add_fields_to_field_document.xml"/>
+
+</databaseChangeLog>

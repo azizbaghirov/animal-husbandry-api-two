@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_add_column_to_breeding_animal_farm" author="${author}">
+
+        <addColumn schemaName="${schema}" tableName="BreedingAnimalFarm">
+            <column name="AnimalTypeId" type="INTEGER"/>
+        </addColumn>
+
+        <addForeignKeyConstraint constraintName="FK_BreedingAnimalFarm_AnimalTypeId"
+                                 baseTableSchemaName="${schema}" baseTableName="BreedingAnimalFarm"
+                                 baseColumnNames="AnimalTypeId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="AnimalType"
+                                 referencedColumnNames="AnimalTypeId"/>
+
+    </changeSet>
+
+
+    <changeSet id="changelog.DMZ_transfer_animal_type_from_certification_application_to_breeding_animal_farm"
+               author="${author}">
+        <sql>
+            UPDATE baf
+            SET baf.AnimalTypeId = ca.AnimalTypeId FROM AnimalHusbandry.BreedingAnimalFarm baf
+            JOIN AnimalHusbandry.CertificationApplication ca
+            ON baf.FarmId = ca.FarmId
+        </sql>
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_delete_animal_type_id_from_certification_application" author="${author}">
+        <dropForeignKeyConstraint baseTableSchemaName="${schema}" baseTableName="CertificationApplication"
+                                  constraintName="FK_CertificationApplication_AnimalTypeId"/>
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="AnimalTypeId"/>
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_animal_sort_column_to_breeding_animal_farm" author="${author}">
+
+        <addColumn schemaName="${schema}" tableName="BreedingAnimalFarm">
+            <column name="AnimalSortId" type="NVARCHAR(255)"/>
+        </addColumn>
+
+        <addForeignKeyConstraint constraintName="FK_BreedingAnimalFarm_AnimalSortId"
+                                 baseTableSchemaName="${schema}" baseTableName="BreedingAnimalFarm"
+                                 baseColumnNames="AnimalSortId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="AnimalSort"
+                                 referencedColumnNames="AnimalSortId"/>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_transfer_animal_sort_from_certification_application_to_breeding_animal_farm"
+               author="${author}">
+        <sql>
+            UPDATE baf
+            SET baf.AnimalSortId = ca.AnimalSortId FROM AnimalHusbandry.BreedingAnimalFarm baf
+            JOIN AnimalHusbandry.CertificationApplication ca
+            ON baf.FarmId = ca.FarmId
+        </sql>
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_delete_animal_sort_id_from_certification_application" author="${author}">
+        <dropForeignKeyConstraint baseTableSchemaName="${schema}" baseTableName="CertificationApplication"
+                                  constraintName="FK_CertificationApplication_AnimalSortId"/>
+        <dropColumn schemaName="${schema}" tableName="CertificationApplication" columnName="AnimalSortId"/>
+    </changeSet>
+
+    <changeSet  id="changelog.DMZ_modify_farm_current_address_nvarchar_length" author="${author}">
+        <modifyDataType
+                schemaName="${schema}"
+                tableName="BreedingAnimalFarm"
+                columnName="CurrentAddress"
+                newDataType="NVARCHAR(512)"/>
+    </changeSet>
+
+
+</databaseChangeLog>

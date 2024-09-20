@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_final_monitoring_decision_file_path_container_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="FinalMonitoringDecisionFilePathContainer">
+
+            <column name="FinalMonitoringDecisionId" type="UUID">
+                <constraints nullable="false"
+                             notNullConstraintName="NN_FinalMonitoringDecisionFilePathContainer_FinalMonitoringDecisionId"/>
+            </column>
+
+            <column name="FileId" type="UUID">
+                <constraints nullable="false"
+                             notNullConstraintName="NN_FinalMonitoringDecisionFilePathContainer_FileId"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint
+                constraintName="FK_FinalMonitoringDecisionFilePathContainer_FinalMonitoringDecisionId"
+                baseTableSchemaName="${schema}" baseTableName="FinalMonitoringDecisionFilePathContainer"
+                baseColumnNames="FinalMonitoringDecisionId"
+                referencedTableSchemaName="${schema}" referencedTableName="FinalMonitoringDecision"
+                referencedColumnNames="FinalMonitoringDecisionId"/>
+
+        <addForeignKeyConstraint constraintName="FK_FinalMonitoringDecisionFilePathContainer_FileId"
+                                 baseTableSchemaName="${schema}"
+                                 baseTableName="FinalMonitoringDecisionFilePathContainer"
+                                 baseColumnNames="FileId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="FilePathContainer"
+                                 referencedColumnNames="FileId"/>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_invalidate_at_to_final_monitoring_judgement_table" author="${author}">
+
+        <addColumn schemaName="${schema}" tableName="FinalMonitoringJudgement">
+            <column name="InvalidatedAt" type="TIMESTAMP"/>
+        </addColumn>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_registered_at_to_final_monitoring_decision_table" author="${author}">
+
+        <addColumn schemaName="${schema}" tableName="FinalMonitoringDecision">
+            <column name="RegisteredAt" type="TIMESTAMP"/>
+        </addColumn>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_add_sequence_certification_final_monitoring_number" author="${author}">
+
+        <createSequence sequenceName="SEQ_BreedingAnimalFarmCertification_RegistrationNumber"
+                        schemaName="${schema}"
+                        incrementBy="1"
+                        startValue="1000"/>
+
+    </changeSet>
+
+    <changeSet id="changelog.DMZ_drop_not_null_expiration_date_from_breeding_animal_farm_certificate"
+               author="${author}">
+
+        <dropNotNullConstraint
+                schemaName="${schema}"
+                tableName="BreedingAnimalFarmCertificate"
+                columnName="ExpirationDate"
+                columnDataType="DATE"/>
+    </changeSet>
+
+</databaseChangeLog>

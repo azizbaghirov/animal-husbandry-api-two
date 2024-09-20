@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="changelog.DMZ_create_application_animal_table" author="${author}">
+
+        <createTable schemaName="${schema}" tableName="ApplicationAnimal">
+
+            <column name="ApplicationId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_ApplicationAnimal_ApplicationId"/>
+            </column>
+
+            <column name="AnimalId" type="INTEGER">
+                <constraints nullable="false" notNullConstraintName="NN_ApplicationAnimal_AnimalId"/>
+            </column>
+
+        </createTable>
+
+        <addForeignKeyConstraint constraintName="FK_ApplicationAnimal_ApplicationId"
+                                 baseTableSchemaName="${schema}" baseTableName="ApplicationAnimal"
+                                 baseColumnNames="ApplicationId"
+                                 referencedTableSchemaName="${schema}" referencedTableName="CertificationApplication"
+                                 referencedColumnNames="ApplicationId"/>
+    </changeSet>
+
+</databaseChangeLog>
