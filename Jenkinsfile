@@ -1,7 +1,7 @@
 import groovy.transform.Field
 
-@Field // make variable global scope
-Map FAILED_STAGES = [:]
+//@Field // make variable global scope
+//Map FAILED_STAGES = [:]
 
 def runTest(String stageName, Closure body) {
   catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
