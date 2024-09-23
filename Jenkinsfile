@@ -1,4 +1,4 @@
-import groovy.transform.Field
+//import groovy.transform.Field
 
 //@Field // make variable global scope
 //Map FAILED_STAGES = [:]
