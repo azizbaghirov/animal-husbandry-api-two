@@ -1,3 +1,3 @@
 @Library("test-library") _
 
-fullpipeline(path:"aziz-test-two",artifact:"animal-husbandry-twoo.war",googlechatspaceid:"aziz-space2")
+fullpipeline(path:"aziz-test-two",artifact:"animal-husbandry-two.war",googlechatspaceid:"aziz-space2")
